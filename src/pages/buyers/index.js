@@ -2,6 +2,7 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import styles from "./Buyers.module.css";
+import { estateTypes } from "@/data/estateTypes";
 
 export default function Buyers() {
   const [buyers, setBuyers] = useState([]);
@@ -15,6 +16,7 @@ export default function Buyers() {
         setBuyers(data);
       });
   }, [query.zipCode]);
+
   return (
     <>
       <Head>
@@ -22,9 +24,14 @@ export default function Buyers() {
       </Head>
       <div className="lacj-wrapper">
         <h1 className={styles.headline}>Potential buyers</h1>
+
         <ul>
           {buyers.map((singleBuyer) => (
-            <li key={singleBuyer.id}>{console.log(singleBuyer)}</li>
+            <li key={singleBuyer.id}>
+              <p>{singleBuyer.id}</p>
+              <p>{singleBuyer.adults}</p>
+              {console.log(singleBuyer)}
+            </li>
           ))}
         </ul>
       </div>

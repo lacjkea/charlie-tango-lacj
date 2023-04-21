@@ -1,5 +1,6 @@
 import Head from "next/head";
 import styles from "./Home.module.css";
+import { useEffect } from "react";
 
 export default function Home() {
   return (
