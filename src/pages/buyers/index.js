@@ -1,14 +1,33 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
+import { useState, useEffect } from "react";
 import styles from "./Buyers.module.css";
 
 export default function Buyers() {
+  const [buyers, setBuyers] = useState([]);
   const { query } = useRouter();
+  console.log("zipCode", query.zipCode);
+  //https://charlie-tango-lacj.vercel.app/api/find-buyers?zipCode=${query.zipCode}
+  useEffect(() => {
+    fetch(`http://localhost:3000/api/find-buyers?zipCode=${query.zipCode}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setBuyers(data);
+      });
+  }, [query.zipCode]);
   return (
     <>
       <Head>
         <title>Find buyer | EDC</title>
       </Head>
+      <div className="lacj-wrapper">
+        <h1 className={styles.headline}>Potential buyers</h1>
+        <ul>
+          {buyers.map((singleBuyer) => (
+            <li key={singleBuyer.id}>{console.log(singleBuyer)}</li>
+          ))}
+        </ul>
+      </div>
       <div className="wrapper">
         <h1 className={styles.headline}>Potential buyers</h1>
         <p>
@@ -46,6 +65,7 @@ export default function Buyers() {
           </pre>
         </div>
       </div>
+      <main></main>
     </>
   );
 }
