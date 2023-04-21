@@ -17,6 +17,24 @@ export default function Buyers() {
       });
   }, [query.zipCode]);
 
+  /* 
+  adults: 1
+children: 1
+description: "Single parent is looking for a Helårsgrund with a minimum size of 84 m2 and a maximum price of 4.300.000 kr. Libero ullam totam quod quod."
+estateType: "7"
+id: "38e485a2"
+maxPrice: 4300000
+minSize: 84
+takeoverDate: "2023-05-29" 
+*/
+
+  function getEstateType(eid) {
+    const eStateType = estateTypes.find((eStateType) => eStateType.id == eid);
+    console.log(eStateType.name);
+    console.log("eStatename: ", eStateType.name);
+    return eStateType.name;
+  }
+  getEstateType(1);
   return (
     <>
       <Head>
@@ -28,8 +46,12 @@ export default function Buyers() {
         <ul>
           {buyers.map((singleBuyer) => (
             <li key={singleBuyer.id}>
-              <p>{singleBuyer.id}</p>
-              <p>{singleBuyer.adults}</p>
+              {/* <p>{singleBuyer.id}</p> */}
+              {/* <p>{singleBuyer.adults}</p> */}
+              <p>
+                {singleBuyer.estateType}:{" "}
+                {getEstateType(singleBuyer.estateType)}
+              </p>
               {console.log(singleBuyer)}
             </li>
           ))}
