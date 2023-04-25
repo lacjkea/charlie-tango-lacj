@@ -1,6 +1,7 @@
 @import "fonts.css";
 
 :root {
+  --primary: 22 69 115;
   --dark-blue: #0d2e4d;
   --blue: #164573; /* Primary color; */
   --hover: #2985cc;
@@ -41,10 +42,37 @@ body {
   font-family: var(--font-sans);
   background: var(--white);
   color: var(--blue);
+  -webkit-font-smoothing: antialiased;
 }
 
 .wrapper {
   max-width: 800px;
   padding: 0 1rem;
   margin: 0 auto;
+}
+
+/* body {
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+  min-height: 100vh;
+  font-family: Lato, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI,
+    Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", Segoe UI Symbol, "Noto Color Emoji";
+  --tw-text-opacity: 1;
+  color: rgb(var(--primary) / var(--tw-text-opacity));
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+} */
+
+sup {
+  font-size: 0.5em;
+}
+
+label {
+  margin-top: 1.5rem;
+  display: block;
+}
+
+label:last-of-type {
+  display: inline-block;
 }
