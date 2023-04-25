@@ -7,10 +7,11 @@ import { estateTypes } from "@/data/estateTypes";
 export default function Buyers() {
   const [buyers, setBuyers] = useState([]);
   const { query } = useRouter();
+  console.log("query", query);
   console.log("zipCode", query.zipCode);
   //https://charlie-tango-lacj.vercel.app/api/find-buyers?zipCode=${query.zipCode}
   useEffect(() => {
-    fetch(`http://localhost:3000/api/find-buyers?zipCode=${query.zipCode}`)
+    fetch(`../api/find-buyers?zipCode=${query.zipCode}`)
       .then((res) => res.json())
       .then((data) => {
         setBuyers(data);
