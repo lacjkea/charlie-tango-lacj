@@ -13,9 +13,24 @@
   border: 1px solid var(--dusty-aqua);
   margin-bottom: 1rem;
 }
-.content :first-child {
+/* .content :first-child {
   margin-top: 0;
-}
+} 
 .content :last-child {
   margin-bottom: 0;
+}*/
+
+.buyer-cards {
+  /*lacj: className={styles["buyer-cards"] */
+  background-color: hotpink;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  user-select: none; /* don't select text when entire card is clickable */
+}
+
+.buyer-card {
+  /* className="buyer-card" - not updating while dev, so it also is className={styles["buyer-card"] */
+
+  background-color: red;
 }

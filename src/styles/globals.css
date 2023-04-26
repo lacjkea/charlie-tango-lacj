@@ -51,6 +51,33 @@ body {
   margin: 0 auto;
 }
 
+.headline {
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.5;
+  letter-spacing: 0.025em;
+}
+
+.accent {
+  color: var(--yellow);
+  font-family: var(--font-serif);
+  font-size: 3rem;
+  line-height: 1.33;
+  font-weight: 400;
+  margin: 0;
+}
+
+.button {
+  padding: 0.5rem;
+  background: var(--blue);
+  color: var(--white);
+  cursor: pointer;
+}
+
+.button:hover {
+  background: var(--hover);
+}
+
 /* body {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
@@ -71,6 +98,7 @@ sup {
 label {
   margin-top: 1.5rem;
   display: block;
+  cursor: pointer;
 }
 
 label:last-of-type {

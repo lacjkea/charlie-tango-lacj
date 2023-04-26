@@ -39,4 +39,16 @@ export const estateTypes = [
     name: "Landejendom",
     id: "9",
   },
+  {
+    name: "testing",
+    id: "10",
+  },
 ];
+
+export function getEstateType(eid) {
+  //in the array find the id that is equal to this entry's id
+  const eStateType = estateTypes.find((eStateType) => eStateType.id == eid);
+  console.log(eStateType.name);
+  console.log("eStateType.name: ", eStateType.name);
+  return eStateType.name;
+}
