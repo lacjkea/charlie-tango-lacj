@@ -9,7 +9,7 @@ export default function Buyers() {
   const { query } = useRouter();
   console.log("query", query);
   console.log("zipCode", query.zipCode);
-  console.log("query estateType", query.estateType);
+  // console.log("query estateType", query.estateType);
   //https://charlie-tango-lacj.vercel.app/api/find-buyers?zipCode=${query.zipCode}
   useEffect(() => {
     fetch(`../api/find-buyers?zipCode=${query.zipCode}`)
@@ -37,10 +37,11 @@ takeoverDate: "2023-05-29"
       </Head>
       <div className="wrapper">
         <div className={styles.content}>
-          <h1 className="headline">
+          {/*     <h1 className="headline">
             2. Vælg potentielle købere i {query.zipCode}, du gerne vil i kontakt
             med
-          </h1>
+          </h1> */}
+          <h1 className="headline">2. Vælg potentielle købere</h1>
           <form action="/contact" method="GET" className={styles.form}>
             <div className={styles["buyer-cards"]}>
               {buyers.map((singleBuyer) => (
