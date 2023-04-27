@@ -1,11 +1,12 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { useState, useEffect } from "react";
+import { useState, useRef } from "react";
 import cstyles from "./../../styles/Common.module.css";
 // import styles from "./Contact.module.css";
 import { getEstateType } from "@/data/estateTypes";
 
 export default function Contact() {
+  const formEl = useRef(null);
   const { query } = useRouter();
   //   console.log("query", query);
   //   const contact_ids = query.contact_ids;
@@ -53,6 +54,26 @@ export default function Contact() {
     );
   }
 
+  function submitted(e) {
+    console.log(formEl.current.elements);
+    e.preventDefault();
+    alert("nononono");
+    const payload = {
+      name: "Lasse",
+    };
+    fetch("/api/add-contactlist", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    })
+      .then((res) => res.json())
+      .then((data) => console.log(data));
+
+    // construct an Object for supabase
+  }
+
   return (
     <>
       <Head>
@@ -63,12 +84,10 @@ export default function Contact() {
           <h1 className="headline">3. Kontakt potentielle købere</h1>
           <form
             action="#"
-            onSubmit={(e) => {
-              e.preventDefault();
-              alert("nononono");
-            }}
+            onSubmit={submitted}
             method="GET"
             className={cstyles.form}
+            ref={formEl}
           >
             <div className={cstyles["buyer-cards"]}>
               <ul className={cstyles.label}>
