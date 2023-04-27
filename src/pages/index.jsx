@@ -80,7 +80,9 @@ export default function Home() {
                 title="The price should be digits (0 to 9)."
               />
             </label>
-            <button className={cstyles.button}>Find potential buyers</button>
+            <button className={cstyles.button} type="submit">
+              Find potential buyers
+            </button>
           </form>
         </div>
         <h3>To do</h3>

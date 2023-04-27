@@ -10,12 +10,13 @@ export default async function handler(req, res) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        apikey: process.env.ANON_Key,
+        apikey: process.env.LACJ_SUPABASE_KEY,
         Prefer: "return=representation",
       },
       body: JSON.stringify(req.body),
     }
   ).then((res) => res.json());
-  console.log({ response });
-  res.redirect(307, "/");
+  console.log("response API", { response });
+  //return res.redirect(307, "/thanks");
+  return res.status(200).json({ response });
 }

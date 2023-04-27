@@ -55,11 +55,29 @@ export default function Contact() {
   }
 
   function submitted(e) {
-    console.log(formEl.current.elements);
     e.preventDefault();
-    alert("nononono");
+    console.log(formEl.current.elements);
+    const formValues = formEl.current.elements;
+    // console.log("contactids", formValues.contacts.values);
+
+    let contact_ids = [];
+    formValues.contacts.forEach((ct) => {
+      console.log(ct.value);
+      contact_ids.push(ct.value);
+    });
+    // console.log("cts", contact_ids);
+
+    // return false;
+    // alert("nononono");
+
+    // construct an Object for supabase
     const payload = {
-      name: "Lasse",
+      fname: formValues.fname.value,
+      email: formValues.email.value,
+      phone: formValues.phone.value,
+      contactids: contact_ids,
+      consent: formValues.consent.value,
+      message: formValues.message.value,
     };
     fetch("/api/add-contactlist", {
       method: "POST",
@@ -69,31 +87,44 @@ export default function Contact() {
       body: JSON.stringify(payload),
     })
       .then((res) => res.json())
-      .then((data) => console.log(data));
-
-    // construct an Object for supabase
+      .then((data) => afterSubmit(data));
+    function afterSubmit(data) {
+      console.log("data", data.response);
+      if (data.response.code) {
+        alert(data.response.code + " " + data.response.message);
+      } else {
+        /*   alert("yas");
+        console.log(e); */
+        e.target.submit();
+      }
+    }
   }
 
   return (
     <>
       <Head>
-        <title>3. Kontakt | EDC</title>
+        <title>3:4 Kontakt | EDC</title>
       </Head>
       <div className="wrapper">
         <div className={cstyles.content}>
-          <h1 className="headline">3. Kontakt potentielle købere</h1>
+          <h1 className={cstyles.headline}>3. Kontakt potentielle købere</h1>
           <form
-            action="#"
+            action="/thanks"
             onSubmit={submitted}
             method="GET"
             className={cstyles.form}
             ref={formEl}
           >
+            {/* lacj */}
             <div className={cstyles["buyer-cards"]}>
               <ul className={cstyles.label}>
                 {contactList.map((singleContact) => (
                   <li key={singleContact}>
-                    <input type="hidden" name="contacs" value={singleContact} />
+                    <input
+                      type="hidden"
+                      name="contacts"
+                      value={singleContact}
+                    />
                     Ref: {singleContact}
                     <button
                       onClick={() => removeContact({ singleContact })}
@@ -122,7 +153,7 @@ export default function Contact() {
                 />
               </label>
               <label>
-                <input type="checkbox" name="consent" id="consent" />
+                <input type="checkbox" name="consent" id="consent" value="1" />
                 Ja tak. EDC må gerne kontakte mig med (andre?) tilbud og
                 information relateret til ejendomshandel.
               </label>
@@ -136,7 +167,7 @@ export default function Contact() {
                 ></textarea>
               </label>
 
-              <button className="button" type="submit">
+              <button className={cstyles.button} type="submit">
                 Kontakt købere
               </button>
             </div>

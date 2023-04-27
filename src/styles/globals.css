@@ -1,7 +1,7 @@
 @import "fonts.css";
 
 :root {
-  --primary: 22 69 115;
+  --primary: 22 69 115; /* lacj? */
   --dark-blue: #0d2e4d;
   --blue: #164573; /* Primary color; */
   --hover: #2985cc;
@@ -47,6 +47,13 @@ body {
   background: var(--white);
   color: var(--blue);
   -webkit-font-smoothing: antialiased;
+}
+
+option,
+input,
+textarea {
+  font-family: var(--font-sans);
+  /* background-color: yellow; */
 }
 
 .wrapper {
