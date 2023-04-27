@@ -1,5 +1,6 @@
 import Head from "next/head";
-import styles from "./Home.module.css";
+// import styles from "./Home.module.css";
+import cstyles from "./../styles/Common.module.css";
 import { estateTypes } from "@/data/estateTypes";
 import { useEffect } from "react";
 
@@ -7,17 +8,18 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>1 - Find buyer | EDC</title>
+        {/*      <title>1 - Find buyer | EDC</title> */}
+        <title>1:4 Sælg din bolig | EDC</title>
       </Head>
       <div className="wrapper">
-        <div className={styles.content}>
-          <h1 className="headline">
-            Sælg <span className="accent">din</span> gamle bolig
+        <div className={cstyles.content}>
+          <h1 className={cstyles.headline}>
+            Sælg <span className={cstyles.accent}>din</span> gamle bolig
           </h1>
           {/* Read this: https://nextjs.org/docs/guides/building-forms (they said) */}
-          <form action="/buyers" method="GET" className={styles.form}>
+          <form action="/buyers" method="GET" className={cstyles.form}>
             <label>
-              <span className={styles.label}>Postnummer *</span>
+              <span className={cstyles.label}>Postnummer *</span>
               <input
                 name="zipCode"
                 type="text"
@@ -33,7 +35,7 @@ export default function Home() {
               koder med tre sifre og https://www.dst.dk/da/TilSalg/Forskningsservice/Dokumentation/hoejkvalitetsvariable/folketal/postnr*/}
             </label>
             <label>
-              <span className={styles.label}>Boligtype *</span>
+              <span className={cstyles.label}>Boligtype *</span>
               <select
                 name="estateType"
                 id="estatetype-select"
@@ -54,7 +56,7 @@ export default function Home() {
               </select>
             </label>
             <label>
-              <span className={styles.label}>
+              <span className={cstyles.label}>
                 Størrelse i kvadrameter (m<sup>2</sup>) *
               </span>
               <input
@@ -69,7 +71,7 @@ export default function Home() {
               />
             </label>
             <label>
-              <span className={styles.label}>Forventet pris i DKK</span>
+              <span className={cstyles.label}>Forventet pris i DKK</span>
               <input
                 name="price"
                 type="text"
@@ -78,17 +80,7 @@ export default function Home() {
                 title="The price should be digits (0 to 9)."
               />
             </label>
-            <label htmlFor="message">
-              <span className={styles.label}>Evt. besked</span>
-              <textarea
-                name="message"
-                id="message"
-                cols="30"
-                rows="10"
-              ></textarea>
-            </label>
-            {/* <button className={styles.button}> */}
-            <button className="button">Find potential buyers</button>
+            <button className={cstyles.button}>Find potential buyers</button>
           </form>
         </div>
         <h3>To do</h3>

@@ -1,7 +1,8 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
-import styles from "./Contact.module.css";
+import cstyles from "./../../styles/Common.module.css";
+// import styles from "./Contact.module.css";
 import { getEstateType } from "@/data/estateTypes";
 
 export default function Contact() {
@@ -58,25 +59,69 @@ export default function Contact() {
         <title>3. Kontakt | EDC</title>
       </Head>
       <div className="wrapper">
-        <div className={styles.content}>
+        <div className={cstyles.content}>
           <h1 className="headline">3. Kontakt potentielle købere</h1>
-          <form>
-            <div className={styles["buyer-cards"]}>
-              {contactList.map((singleContact) => (
-                <p key={singleContact}>
-                  Ref: {singleContact}
-                  <button
-                    onClick={() => removeContact({ singleContact })}
-                    type="button"
-                  >
-                    X
-                  </button>
-                </p>
-              ))}
+          <form
+            action="#"
+            onSubmit={(e) => {
+              e.preventDefault();
+              alert("nononono");
+            }}
+            method="GET"
+            className={cstyles.form}
+          >
+            <div className={cstyles["buyer-cards"]}>
+              <ul className={cstyles.label}>
+                {contactList.map((singleContact) => (
+                  <li key={singleContact}>
+                    <input type="hidden" name="contacs" value={singleContact} />
+                    Ref: {singleContact}
+                    <button
+                      onClick={() => removeContact({ singleContact })}
+                      type="button"
+                    >
+                      Fjern
+                    </button>
+                  </li>
+                ))}
+              </ul>
+              <label>
+                <span className={cstyles.label}>Name *</span>
+                <input type="text" name="fname" id="fname" required />
+              </label>
+              <label>
+                <span className={cstyles.label}>Email *</span>
+                <input type="text" name="email" id="email" />
+              </label>
+              <label>
+                <span className={cstyles.label}>Phone *</span>
+                <input
+                  type="text"
+                  name="phone"
+                  id="phone"
+                  inputMode="numeric"
+                />
+              </label>
+              <label>
+                <input type="checkbox" name="consent" id="consent" />
+                Ja tak. EDC må gerne kontakte mig med (andre?) tilbud og
+                information relateret til ejendomshandel.
+              </label>
+              <label htmlFor="message">
+                <span className={cstyles.label}>Evt. besked</span>
+                <textarea
+                  name="message"
+                  id="message"
+                  cols="30"
+                  rows="10"
+                ></textarea>
+              </label>
+
+              <button className="button" type="submit">
+                Kontakt købere
+              </button>
             </div>
-            <button className="button">
-              Confirm buyers you&#39;d like to get in touch with
-            </button>
+            {/* .buyer-cards */}
           </form>
           <p>
             On this page you get the <code>`query`</code> params like{" "}
@@ -106,7 +151,7 @@ export default function Contact() {
               </a>
             </li>
           </ul>
-          <div className={styles.content}>
+          <div className={cstyles.content}>
             <h2>Query params:</h2>
             <pre>
               <code>{JSON.stringify(query, null, 2)}</code>

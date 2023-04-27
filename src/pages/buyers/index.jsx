@@ -1,6 +1,7 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
+import cstyles from "./../../styles/Common.module.css"; //lacj - what?
 import styles from "./Buyers.module.css";
 import { getEstateType } from "@/data/estateTypes";
 
@@ -33,16 +34,15 @@ takeoverDate: "2023-05-29"
   return (
     <>
       <Head>
-        <title>2. Find buyer | EDC</title>
+        <title>2:4 Vælg købere | EDC</title>
       </Head>
       <div className="wrapper">
         <div className={styles.content}>
-          {/*     <h1 className="headline">
-            2. Vælg potentielle købere i {query.zipCode}, du gerne vil i kontakt
-            med
-          </h1> */}
-          <h1 className="headline">2. Vælg potentielle købere</h1>
-          <form action="/contact" method="GET" className={styles.form}>
+          <h1 className={cstyles.headline}>
+            2. Vælg <span className={cstyles.accent}>dine</span> potentielle
+            købere
+          </h1>
+          <form action="/contact" method="GET" className={cstyles.form}>
             <div className={styles["buyer-cards"]}>
               {buyers.map((singleBuyer) => (
                 <label className={styles["buyer-card"]} key={singleBuyer.id}>
@@ -67,7 +67,7 @@ takeoverDate: "2023-05-29"
                 </label>
               ))}
             </div>
-            <button className="button">
+            <button className={cstyles.button}>
               Confirm buyers you&#39;d like to get in touch with
             </button>
           </form>
