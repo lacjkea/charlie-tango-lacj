@@ -1,15 +1,16 @@
-import Head from "next/head";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
-import cstyles from "./../../styles/Common.module.css"; //lacj - what?
+import Head from "next/head";
+import cstyles from "./../../styles/Common.module.css";
 import styles from "./Buyers.module.css";
 import { getEstateType } from "@/data/estateTypes";
 
 export default function Buyers() {
-  const [buyers, setBuyers] = useState([]);
   const { query } = useRouter();
   console.log("query", query);
-  console.log("zipCode", query.zipCode);
+  const [buyers, setBuyers] = useState([]);
+
+  // console.log("zipCode", query.zipCode);
   // console.log("query estateType", query.estateType);
   //https://charlie-tango-lacj.vercel.app/api/find-buyers?zipCode=${query.zipCode}
   useEffect(() => {
@@ -59,10 +60,25 @@ takeoverDate: "2023-05-29"
                     </p>
                     <p>{singleBuyer.description}</p>
                     <input
+                      className="visual-hidden"
                       type="checkbox"
                       value={singleBuyer.id}
                       name="contact_ids" //lacj
                     />
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="48"
+                      height="48"
+                      viewBox="0 0 24 24"
+                      aria-hidden="true"
+                    >
+                      <path
+                        // fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        d="M12 18.573l6.894-7.015a3.898 3.898 0 0 0 0-5.44 3.698 3.698 0 0 0-5.298 0L12 7.742l-1.596-1.624a3.698 3.698 0 0 0-5.298 0 3.898 3.898 0 0 0 0 5.44L12 18.573z"
+                      />
+                    </svg>
                   </article>
                 </label>
               ))}

@@ -13,7 +13,7 @@ export default function Thanks() {
       <div className="wrapper">
         <div className={cstyles.content}>
           <h1 className={cstyles.headline}>
-            Tak skal <span className={cstyles.accent}>du</span> have
+            4. Tak skal <span className={cstyles.accent}>du</span> have
           </h1>
           <h2>Du hører fra os indenfor 1-2 hverdage.</h2>
         </div>

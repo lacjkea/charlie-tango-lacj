@@ -35,4 +35,5 @@ yarn-error.log*
 .idea
 .vscode
 
+/notes
 /notes/mmd-case.pdf

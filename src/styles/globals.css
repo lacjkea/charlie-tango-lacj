@@ -1,7 +1,7 @@
 @import "fonts.css";
 
 :root {
-  --primary: 22 69 115; /* lacj? */
+  /* --primary: 22 69 115; /* primærfarven nednefor var off. Denne er fra edc - --blue fixed m. body {-webkit-font-smoothing: antialiased; } */
   --dark-blue: #0d2e4d;
   --blue: #164573; /* Primary color; */
   --hover: #2985cc;
@@ -30,7 +30,7 @@
   box-sizing: border-box;
   border-width: 0;
   border-style: solid;
-  border-color: currentColor;
+  border-color: currentColor; /* follows color */
 }
 
 body,
@@ -57,7 +57,7 @@ textarea {
 }
 
 .wrapper {
-  max-width: 800px;
+  max-width: 1440px;
   padding: 0 1rem;
   margin: 0 auto;
 }
@@ -65,10 +65,27 @@ textarea {
 label {
   display: block;
   margin-top: 1.5rem;
+  cursor: pointer;
 }
 
-button {
-  cursor: pointer;
+:focus-visible {
+  outline: var(--yellow) 5px solid; /* auto */
+}
+:invalid:focus-visible {
+  outline: var(--status-red) 5px solid;
+}
+
+.visual-hidden {
+  /* https://www.nomensa.com/blog/how-improve-web-accessibility-hiding-elements */
+  border: 0;
+  clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+  clip: rect(1px, 1px, 1px, 1px);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
 }
 /* body {
   --tw-bg-opacity: 1;

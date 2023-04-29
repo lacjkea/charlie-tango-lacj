@@ -2,9 +2,19 @@ import Head from "next/head";
 // import styles from "./Home.module.css";
 import cstyles from "./../styles/Common.module.css";
 import { estateTypes } from "@/data/estateTypes";
-import { useEffect } from "react";
+import { useRef, useState } from "react";
 
 export default function Home() {
+  const [price, setPrice] = useState(0);
+  // const inputRangePriceEl = useref(null);
+  const inputTextPriceEl = useRef(null);
+
+  function updatePrice(e) {
+    setPrice(e.target.value);
+    // console.log("hey", inputTextPriceEl);
+    inputTextPriceEl.current.focus();
+  }
+
   return (
     <>
       <Head>
@@ -14,7 +24,7 @@ export default function Home() {
       <div className="wrapper">
         <div className={cstyles.content}>
           <h1 className={cstyles.headline}>
-            Sælg <span className={cstyles.accent}>din</span> gamle bolig
+            1. Sælg <span className={cstyles.accent}>din</span> gamle bolig
           </h1>
           {/* Read this: https://nextjs.org/docs/guides/building-forms (they said) */}
           <form action="/buyers" method="GET" className={cstyles.form}>
@@ -75,13 +85,24 @@ export default function Home() {
               <input
                 name="price"
                 type="text"
+                onChange={updatePrice}
+                value={price}
+                ref={inputTextPriceEl}
                 inputMode="numeric"
                 pattern="[0-9]+"
                 title="The price should be digits (0 to 9)."
               />
             </label>
+            <input
+              onChange={updatePrice}
+              type="range"
+              value={price}
+              min="0"
+              max="20000000"
+              step="50000"
+            ></input>
             <button className={cstyles.button} type="submit">
-              Find potential buyers
+              Find købere
             </button>
           </form>
         </div>

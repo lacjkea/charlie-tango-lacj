@@ -10,9 +10,9 @@ export function Header() {
         <Image
           className={styles.logo}
           src={logo.src}
-          width={64}
-          height={64}
-          alt="EDC"
+          width={48}
+          height={48}
+          alt="EDC logo"
           priority
         />
       </Link>

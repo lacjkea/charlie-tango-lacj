@@ -1,6 +1,6 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import cstyles from "./../../styles/Common.module.css";
 // import styles from "./Contact.module.css";
 import { getEstateType } from "@/data/estateTypes";
@@ -8,7 +8,7 @@ import { getEstateType } from "@/data/estateTypes";
 export default function Contact() {
   const formEl = useRef(null);
   const { query } = useRouter();
-  //   console.log("query", query);
+  console.log("query", query);
   //   const contact_ids = query.contact_ids;
   //   const contact_ids = query.contact_ids;
   const [contactList, updateList] = useState([
@@ -141,16 +141,12 @@ export default function Contact() {
               </label>
               <label>
                 <span className={cstyles.label}>Email *</span>
-                <input type="text" name="email" id="email" />
+                <input type="email" name="email" id="email" />
               </label>
               <label>
                 <span className={cstyles.label}>Phone *</span>
-                <input
-                  type="text"
-                  name="phone"
-                  id="phone"
-                  inputMode="numeric"
-                />
+                <input type="tel" name="phone" id="phone" />
+                {/*  inputMode="numeric" */}
               </label>
               <label>
                 <input type="checkbox" name="consent" id="consent" value="1" />
