@@ -25,7 +25,7 @@ export default function Home() {
         <div className={cstyles.content}>
           <h1 className={cstyles.headline}>
             1. Sælg <span className={cstyles.accent}>din</span> gamle bolig -
-            v.2204
+            v.2219
           </h1>
           {/* Read this: https://nextjs.org/docs/guides/building-forms (they said) */}
           <form action="/buyers" method="GET" className={cstyles.form}>
