@@ -60,14 +60,32 @@
 }
 
 .form input {
-  padding: 1rem;
+  padding: var(--space-input);
 }
 
 .form input[type="range"] {
-  padding: 3rem;
-  display: block;
   width: 100%;
   margin: 0;
+  height: 1px;
+  padding: 0;
+  appearance: none;
+  width: 100%;
+  background: var(--blue);
+  border: none;
+  outline: none;
+  margin: 2rem 0;
+}
+
+.form input[type="range"]::-webkit-slider-thumb {
+  /* -webkit-appearance: none !important; */
+  appearance: none; /* or none */
+  box-sizing: border-box;
+  width: 2rem;
+  height: 2rem;
+  background-color: var(--blue);
+  border: var(--stroke) solid var(--yellow);
+  border-radius: 50%;
+  cursor: pointer;
 }
 
 .form path {
@@ -81,7 +99,7 @@
 }
 
 .form option {
-  padding: 0.2rem 0.5rem;
+  padding: var(--space-input);
   width: 100%;
 }
 
