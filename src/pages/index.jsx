@@ -28,7 +28,11 @@ export default function Home() {
             v.23:14
           </h1>
           {/* Read this: https://nextjs.org/docs/guides/building-forms (they said) */}
-          <form action="/buyers" method="GET" className={cstyles.form}>
+          <form
+            action="/buyers"
+            method="GET"
+            className={cstyles.form + " sell"}
+          >
             <label>
               <span className={cstyles.label}>Postnummer *</span>
               <input
@@ -50,7 +54,7 @@ export default function Home() {
               <select
                 name="estateType"
                 id="estatetype-select"
-                size="4"
+                // size="4"
                 title="Please select a type from this list"
                 required
               >
@@ -81,8 +85,17 @@ export default function Home() {
                 required
               />
             </label>
-            <label>
+            <label htmlFor="price">
               <span className={cstyles.label}>Forventet pris i DKK</span>
+              <input
+                name="noname"
+                onChange={updatePrice}
+                type="range"
+                value={price}
+                min="0"
+                max="20000000"
+                step="50000"
+              ></input>
               <input
                 name="price"
                 type="text"
@@ -94,14 +107,6 @@ export default function Home() {
                 title="The price should be digits (0 to 9)."
               />
             </label>
-            <input
-              onChange={updatePrice}
-              type="range"
-              value={price}
-              min="0"
-              max="20000000"
-              step="50000"
-            ></input>
             <button className={cstyles.button} type="submit">
               Find købere
             </button>

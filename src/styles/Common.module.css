@@ -59,21 +59,25 @@
   padding: 1rem;
 }
 
-.form input {
+/* .form input {
   padding: var(--space-input);
+} */
+
+.form [name="zipCode"],
+.form [name="size_m2"] {
+  width: calc(4ch + calc(2 * var(--space-input)));
+  /* text-align: center; */
 }
 
 .form input[type="range"] {
-  width: 100%;
-  margin: 0;
-  height: 1px;
-  padding: 0;
   appearance: none;
   width: 100%;
+  height: 1px;
+  padding: 0;
   background: var(--blue);
   border: none;
   outline: none;
-  margin: 2rem 0;
+  margin: 0 0 1.5rem 0;
 }
 
 .form input[type="range"]::-webkit-slider-thumb {
@@ -98,6 +102,13 @@
   fill: currentColor;
 }
 
+.form [name="price"] {
+  margin: 0 auto;
+  width: calc(8ch + calc(2 * var(--space-input)));
+  display: block;
+  text-align: center;
+}
+
 .form option {
   padding: var(--space-input);
   width: 100%;
@@ -111,7 +122,9 @@ form .label {
 }
 
 .content label:last-of-type {
-  display: inline-block;
+  /* display: inline-block; */
+  /* background: yellow; */
+  margin-bottom: calc(2 * var(--space-input));
 }
 
 /* lacj */

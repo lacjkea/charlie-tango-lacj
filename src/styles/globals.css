@@ -108,10 +108,31 @@ input[type="url"],
 input[type="week"],
 option,
 option:checked,
+select,
 select:focus,
 textarea {
   font-size: 1rem;
+  padding: var(--space-input);
+  border-radius: 0;
 }
+
+/* option,
+option:checked {
+  padding: 4rem;
+} */
+
+select {
+  /* appearance: none; */
+  /* background-image: url("https://developer.mozilla.org/static/media/menu.1ed93cf1ba8c04627c11.svg"); */
+  background-color: var(--white);
+  /* background-color: red; */
+  /* border-radius: 0.4rem; */
+  /* padding: var(--space-input); */
+  /* padding: 4rem; */
+  height: calc(1.5rem + calc(2 * var(--space-input)));
+  color: var(--black);
+}
+
 /* body {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
