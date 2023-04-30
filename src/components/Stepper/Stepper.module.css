@@ -1,0 +1,114 @@
+.stepper ul {
+  list-style-type: none;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  /*  display: flex;
+  justify-content: space-between; */
+  gap: 0.5rem;
+}
+
+.stepper li {
+  /* background-color: hotpink; */
+  position: relative;
+}
+
+.stepper li a {
+  width: 2rem;
+  height: 2rem;
+  display: grid;
+  /* place-content: center; */
+  justify-content: center;
+  border-radius: 50%;
+  background-color: var(--dusty-blue-light);
+  text-decoration: none;
+}
+
+.stepper li:last-child a {
+  /* edc-logo */
+  background-color: transparent;
+}
+
+.stepper li.done a {
+  background-color: var(--grey);
+}
+
+.accent {
+  color: var(--blue);
+  font-family: var(--font-serif);
+  font-size: 2rem;
+  line-height: 1.33;
+  font-weight: 400;
+  margin: 0;
+}
+
+.active .accent {
+  color: var(--yellow);
+}
+
+.stepper li.active a {
+  outline: 5px solid var(--yellow);
+  background-color: var(--dusty-blue-light);
+}
+
+/* .stepper li span {
+  background-color: green;
+} */
+
+.stepper li::after {
+  content: "";
+  position: absolute;
+  display: block;
+  top: 1rem;
+  left: 2.5rem;
+  height: 2px;
+  width: calc(100% - 2.5rem);
+  background-color: var(--dusty-blue-light);
+}
+
+.stepper li.done::after {
+  background-color: var(--grey);
+}
+
+.stepper li.active::after {
+  background-color: var(--yellow);
+}
+
+.stepper h4 {
+  margin: var(--space-input) 0 0 0;
+  font-weight: 400;
+}
+
+.stepper li:last-of-type::after {
+  all: initial;
+  /* background-color: blue;
+      /* initial : The default value for the property (the browser default). unset : Acts as either inherit or initial. */
+}
+
+.edclogo img {
+  transform: translate(0, -2px);
+  width: calc(2rem + 4px);
+  height: calc(2rem + 4px);
+}
+
+@media only screen and (min-width: 600px) {
+  .stepper li a {
+    width: 3rem;
+    height: 3rem;
+  }
+
+  .accent {
+    font-size: 3rem;
+  }
+
+  .stepper li::after {
+    top: 1.5rem;
+    left: 3.5rem;
+    width: calc(100% - 3.5rem);
+  }
+
+  .edclogo img {
+    transform: translate(0px, -3px);
+    width: calc(3rem + 6px);
+    height: calc(3rem + 6px);
+  }
+}

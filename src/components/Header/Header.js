@@ -1,4 +1,5 @@
 import logo from "@/assets/edc-logo.svg";
+import { Stepper } from "../Stepper/Stepper";
 import Image from "next/image";
 import styles from "./Header.module.css";
 import Link from "next/link";
@@ -16,6 +17,7 @@ export function Header() {
           priority
         />
       </Link>
+      <Stepper></Stepper>
     </header>
   );
 }
