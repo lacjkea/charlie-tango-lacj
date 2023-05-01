@@ -22,7 +22,9 @@ export default function Buyers() {
   //https://charlie-tango-lacj.vercel.app/api/find-buyers?zipCode=${query.zipCode}
   useEffect(() => {
     if (router.query && router.query.zipCode) {
-      fetch(`../api/find-buyers?zipCode=${router.query.zipCode}`)
+      fetch(
+        `../api/find-buyers?zipCode=${router.query.zipCode}&estateType=${router.query.estateType}`
+      )
         .then((res) => res.json())
         .then((data) => {
           setBuyers(data); //lacj clean up data

@@ -32,6 +32,7 @@ export default function Home() {
             action="/buyers"
             method="GET"
             className={cstyles.form + " sell"}
+            autoComplete="on"
           >
             <label>
               <span className={cstyles.label}>Postnummer *</span>

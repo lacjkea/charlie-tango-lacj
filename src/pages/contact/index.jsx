@@ -27,7 +27,7 @@ export default function Contact() {
   //   console.log("contact_ids", query.contact_ids);
 
   //lacj - hardcoded for now:
-  const buyers = [
+  /* const buyers = [
     {
       id: "9751a565",
       maxPrice: 4300000,
@@ -50,7 +50,7 @@ export default function Contact() {
       estateType: "8",
       takeoverDate: "2023-06-03",
     },
-  ];
+  ]; */
 
   function removeContact(id) {
     console.log(id.singleContact);
@@ -121,6 +121,7 @@ export default function Contact() {
               method="GET"
               className={cstyles.form}
               ref={formEl}
+              autoComplete="on"
             >
               {/* lacj */}
               <div className={cstyles["buyer-cards"]}>
