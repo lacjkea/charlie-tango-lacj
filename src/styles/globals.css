@@ -73,6 +73,9 @@ textarea {
 label {
   display: block;
   margin-top: 1.5rem;
+}
+
+label input {
   cursor: pointer;
 }
 
@@ -137,6 +140,10 @@ select {
   /* padding: 4rem; */
   height: calc(1.5rem + calc(2 * var(--space-input)));
   color: var(--black);
+}
+
+sup {
+  font-size: 0.5em;
 }
 
 /* body {

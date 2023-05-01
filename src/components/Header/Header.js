@@ -4,7 +4,7 @@ import Image from "next/image";
 import styles from "./Header.module.css";
 import Link from "next/link";
 
-export function Header() {
+export function Header({ currentStep, setCurrentStep }) {
   return (
     <header className="wrapper">
       <Link href="/" aria-label="EDC">
@@ -17,7 +17,10 @@ export function Header() {
           priority
         />
       </Link>
-      <Stepper></Stepper>
+      <Stepper
+        currentStep={currentStep}
+        setCurrentStep={setCurrentStep}
+      ></Stepper>
     </header>
   );
 }

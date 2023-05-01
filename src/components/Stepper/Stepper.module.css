@@ -21,6 +21,7 @@
   border-radius: 50%;
   background-color: var(--dusty-blue-light);
   text-decoration: none;
+  pointer-events: none;
 }
 
 .stepper li:last-child a {
@@ -30,6 +31,7 @@
 
 .stepper li.done a {
   background-color: var(--grey);
+  pointer-events: initial;
 }
 
 .accent {

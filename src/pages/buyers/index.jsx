@@ -12,25 +12,32 @@ import iconCalendar from "./../../assets/icon-calendar.svg";
 import { getEstateType } from "@/data/estateTypes";
 
 // console.log(iconBoligtype);
-export default function Buyers() {
+export default function Buyers({ setCurrentStep }) {
   const router = useRouter();
+
   // console.log("query", query);
   const [buyers, setBuyers] = useState([]);
+
+  setCurrentStep(2);
+  //console.log("currentStep!", currentStep);
 
   // console.log("zipCode", query.zipCode);
   // console.log("query estateType", query.estateType);
   //https://charlie-tango-lacj.vercel.app/api/find-buyers?zipCode=${query.zipCode}
   useEffect(() => {
-    if (router.query && router.query.zipCode) {
+    if (router.isReady) {
+      const q = router.query;
+      console.log("q", q);
       fetch(
-        `../api/find-buyers?zipCode=${router.query.zipCode}&estateType=${router.query.estateType}`
+        `../api/find-buyers?zipCode=${q.zipCode}&estateType=${q.estateType}&size=${q.size_m2}&maxPrice=${q.price}`
       )
         .then((res) => res.json())
         .then((data) => {
           setBuyers(data); //lacj clean up data
         });
     }
-  }, [router.query]);
+    // sessionStorage.setItem("sellerinfo", )
+  }, [router]);
 
   return (
     <>
@@ -71,18 +78,31 @@ export default function Buyers() {
                           d="M12 18.573l6.894-7.015a3.898 3.898 0 0 0 0-5.44 3.698 3.698 0 0 0-5.298 0L12 7.742l-1.596-1.624a3.698 3.698 0 0 0-5.298 0 3.898 3.898 0 0 0 0 5.44L12 18.573z"
                         />
                       </svg>
-                      <p>{singleBuyer.description}</p>
+                      <p
+                        dangerouslySetInnerHTML={{
+                          __html: singleBuyer.description.replace(
+                            "m2",
+                            "m<sup>2</sup>"
+                          ),
+                        }}
+                      />
+                      {/*             <p>
+                        {singleBuyer.description.replace("m2", "m<sup>2</sup>")}
+                      </p> */}
                       <div>
                         <Image src={iconBoligtype} alt="" aria-hidden="true" />
                         {getEstateType(singleBuyer.estateType)}
                       </div>
                       <div>
                         <Image src={iconMinArea} alt="" aria-hidden="true" />
-                        min. {singleBuyer.minSize} m<sup>2</sup>
+                        min. {singleBuyer.minSize}
+                        <span>
+                          m<sup>2</sup>
+                        </span>
                       </div>
                       <div>
                         <Image src={iconBudget} alt="" aria-hidden="true" />
-                        max. {singleBuyer.maxPrice}
+                        max. {singleBuyer.maxPrice} kr.
                       </div>
                       <div>
                         <Image src={iconCalendar} alt="" aria-hidden="true" />

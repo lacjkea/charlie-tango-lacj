@@ -42,10 +42,6 @@
   margin-bottom: 1rem;
 }
 
-.content .sup {
-  font-size: 0.5em;
-}
-
 .content :first-child {
   margin-top: 0;
 }
@@ -72,12 +68,25 @@
 .form input[type="range"] {
   appearance: none;
   width: 100%;
-  height: 1px;
-  padding: 0;
-  background: var(--blue);
-  border: none;
+  height: 1px; /* wow - https://support.google.com/accessibility/android/answer/7101858?hl=en */
+  background-color: var(--blue);
+  color: var(--dusty-blue-lighter); /* for the clickable border */
+  padding: 2px 0;
+  border-top: currentColor 10px solid;
+  border-bottom: currentColor 10px solid;
   outline: none;
   margin: 0 0 1.5rem 0;
+}
+
+.form input[type="range"]::-moz-range-thumb {
+  appearance: none;
+  box-sizing: border-box;
+  width: 2rem;
+  height: 2rem;
+  background-color: var(--blue);
+  border: var(--stroke) solid var(--yellow);
+  border-radius: 50%;
+  cursor: pointer;
 }
 
 .form input[type="range"]::-webkit-slider-thumb {
@@ -104,7 +113,7 @@
 
 .form [name="price"] {
   margin: 0 auto;
-  width: calc(8ch + calc(2 * var(--space-input)));
+  width: calc(10ch + calc(2 * var(--space-input)));
   display: block;
   text-align: center;
 }

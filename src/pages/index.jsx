@@ -57,6 +57,7 @@ export default function Home() {
                 id="estatetype-select"
                 // size="4"
                 title="Please select a type from this list"
+                defaultValue={"8"}
                 required
               >
                 {estateTypes.map((estate) => {
@@ -78,6 +79,7 @@ export default function Home() {
               <input
                 name="size_m2"
                 type="text"
+                defaultValue={40}
                 minLength="2"
                 maxLength="4"
                 inputMode="numeric"
@@ -89,10 +91,10 @@ export default function Home() {
             <label htmlFor="price">
               <span className={cstyles.label}>Forventet pris</span>
               <input
-                name="noname"
+                // name="noname"
                 onChange={updatePrice}
                 type="range"
-                value={price}
+                value={price || 1000000}
                 min="0"
                 max="20000000"
                 step="50000"
@@ -102,7 +104,7 @@ export default function Home() {
                   name="price"
                   type="text"
                   onChange={updatePrice}
-                  value={price}
+                  value={price || 1000000}
                   ref={inputTextPriceEl}
                   inputMode="numeric"
                   pattern="[0-9]+"
