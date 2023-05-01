@@ -68,11 +68,14 @@ export default function Contact({ currentStep, setCurrentStep }) {
     const formValues = formEl.current.elements;
     console.log("contactids", formValues.contacts);
 
-    let final_contact_ids = [];
-    formValues.contacts.forEach((ct) => {
-      console.log(ct.value);
-      final_contact_ids.push(ct.value);
-    });
+    let final_contact_hiddenform_ids = [];
+    //sender "none", hvis ingen købere er valgt/fundet
+    !formValues.contacts
+      ? final_contact_hiddenform_ids.push("none")
+      : formValues.contacts.forEach((ct) => {
+          console.log(ct.value);
+          final_contact_hiddenform_ids.push(ct.value);
+        });
     // console.log("final_contact_ids", final_contact_ids);
     // return false;
 
@@ -81,7 +84,7 @@ export default function Contact({ currentStep, setCurrentStep }) {
       fname: formValues.fname.value,
       email: formValues.email.value,
       phone: formValues.phone.value,
-      contactids: final_contact_ids,
+      contactids: final_contact_hiddenform_ids,
       consent: formValues.consent.value,
       message: formValues.message.value,
     };
@@ -127,25 +130,37 @@ export default function Contact({ currentStep, setCurrentStep }) {
               {/* lacj */}
               <div className={cstyles["buyer-cards"]}>
                 <ul className={cstyles.label}>
-                  {contactList.map((singleContact) => (
-                    <li key={singleContact}>
-                      <input
-                        type="hidden"
-                        name="contacts"
-                        value={singleContact}
-                      />
-                      Ref: {singleContact}
-                      <button
-                        onClick={() => removeContact({ singleContact })}
-                        type="button"
-                      >
-                        Fjern
-                      </button>
-                    </li>
-                  ))}
+                  {!contactList ? (
+                    <>
+                      <p>
+                        <em>Ingen købere? </em>
+                      </p>
+                      <p>
+                        Det tror vi ikke på. Skal vi hjælpe dig med at finde en
+                        køber?
+                      </p>
+                    </>
+                  ) : (
+                    contactList.map((singleContact) => (
+                      <li key={singleContact}>
+                        <input
+                          type="hidden"
+                          name="contacts"
+                          value={singleContact}
+                        />
+                        Ref: {singleContact}
+                        <button
+                          onClick={() => removeContact({ singleContact })}
+                          type="button"
+                        >
+                          Fjern
+                        </button>
+                      </li>
+                    ))
+                  )}
                 </ul>
                 <label>
-                  <span className={cstyles.label}>Name *</span>
+                  <span className={cstyles.label}>Navn *</span>
                   <input type="text" name="fname" id="fname" required />
                 </label>
                 <label>
@@ -153,7 +168,7 @@ export default function Contact({ currentStep, setCurrentStep }) {
                   <input type="email" name="email" id="email" />
                 </label>
                 <label>
-                  <span className={cstyles.label}>Phone *</span>
+                  <span className={cstyles.label}>Telefon *</span>
                   <input type="tel" name="phone" id="phone" />
                   {/*  inputMode="numeric" */}
                 </label>

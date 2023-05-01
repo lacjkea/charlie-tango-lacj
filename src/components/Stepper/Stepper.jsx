@@ -13,7 +13,7 @@ export function Stepper({ currentStep, setCurrentStep }) {
   return (
     <nav className={styles.stepper}>
       <ul>
-        <li className={styles.done}>
+        <li className={currentStep > 1 ? styles.done : styles.active}>
           <Link
             onClick={() =>
               currentStep > 1
@@ -25,23 +25,27 @@ export function Stepper({ currentStep, setCurrentStep }) {
             }
             href="/"
           >
-            <span className={styles.accent}>✓</span>
+            <span className={styles.accent}>{currentStep > 1 ? "✓" : "1"}</span>
           </Link>
           <h4>Bolig</h4>
         </li>
-        <li className={styles.active}>
+        <li
+          className={`${currentStep === 2 ? styles.active : ""} ${
+            currentStep > 2 ? styles.done : ""
+          }`} /*GPT */
+        >
           <Link
             onClick={() =>
-              currentStep > 1
-                ? jumpToStep(1)
+              currentStep > 2
+                ? jumpToStep(2)
                 : () => {
-                    console.log("undefined step 1 clicked");
+                    console.log("undefined step 2 clicked");
                     return undefined;
                   }
             }
-            href="/"
+            href="/buyers"
           >
-            <span className={styles.accent}>✓</span>
+            <span className={styles.accent}>{currentStep > 2 ? "✓" : "2"}</span>
           </Link>
           <h4>Købere</h4>
         </li>

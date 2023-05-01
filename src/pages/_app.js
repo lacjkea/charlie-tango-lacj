@@ -4,7 +4,7 @@ import { useState } from "react";
 import "@/styles/globals.css";
 
 export default function App({ Component, pageProps }) {
-  const [currentStep, setCurrentStep] = useState(5);
+  const [currentStep, setCurrentStep] = useState(1);
 
   // function nextStep(e) {
   //   e.preventDefault();
