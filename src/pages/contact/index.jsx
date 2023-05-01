@@ -5,18 +5,19 @@ import cstyles from "./../../styles/Common.module.css";
 // import styles from "./Contact.module.css";
 // import { getEstateType } from "@/data/estateTypes";
 
-export default function Contact() {
+export default function Contact({ currentStep, setCurrentStep }) {
   const formEl = useRef(null);
   const router = useRouter();
   // const contact_ids = router.query.contact_ids;
   const [contactList, updateList] = useState([]);
   // console.log("query", router);
   useEffect(() => {
+    setCurrentStep(3);
     if (router.isReady) {
       updateList(router.query.contact_ids);
       console.log("loglist", router.query.contact_ids);
     }
-  }, [router.isReady, router.query.contact_ids]);
+  }, [router.isReady, router.query.contact_ids, setCurrentStep]);
   //   const contact_ids = query.contact_ids;
   /* const [contactList, updateList] = useState([
     "9751a565",

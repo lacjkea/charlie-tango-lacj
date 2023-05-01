@@ -2,9 +2,13 @@ import Head from "next/head";
 // import styles from "./Home.module.css";
 import cstyles from "./../../styles/Common.module.css";
 import { estateTypes } from "@/data/estateTypes";
-// import { useEffect } from "react";
+import { useEffect } from "react";
 
-export default function Thanks() {
+export default function Thanks({ setCurrentStep }) {
+  useEffect(() => {
+    setCurrentStep(4);
+  }, [setCurrentStep]);
+
   return (
     <>
       <Head>

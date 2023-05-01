@@ -25,6 +25,7 @@ export default function Buyers({ currentStep, setCurrentStep }) {
   // console.log("query estateType", query.estateType);
   //https://charlie-tango-lacj.vercel.app/api/find-buyers?zipCode=${query.zipCode}
   useEffect(() => {
+    setCurrentStep(2);
     if (router.isReady) {
       const q = router.query;
       console.log("q", q);
@@ -37,7 +38,6 @@ export default function Buyers({ currentStep, setCurrentStep }) {
         });
     }
     // sessionStorage.setItem("sellerinfo", )
-    setCurrentStep(2);
   }, [router, setCurrentStep]);
 
   return (

@@ -14,13 +14,14 @@ export function Stepper({ currentStep, setCurrentStep }) {
     <nav className={styles.stepper}>
       <ul>
         <li className={styles.done}>
-          {/*    <Link
-            onClick={(e) => (currentStep > 1 ? nextStep(e) : console.log("no"))}
-            href="/"
-          > <span className={styles.accent}>✓</span>  </Link>*/}
           <Link
             onClick={() =>
-              currentStep > 1 ? jumpToStep(1) : console.log("no")
+              currentStep > 1
+                ? jumpToStep(1)
+                : () => {
+                    console.log("undefined step 1 clicked");
+                    return undefined;
+                  }
             }
             href="/"
           >
@@ -29,8 +30,18 @@ export function Stepper({ currentStep, setCurrentStep }) {
           <h4>Bolig</h4>
         </li>
         <li className={styles.active}>
-          <Link href="">
-            <span className={styles.accent}>2</span>
+          <Link
+            onClick={() =>
+              currentStep > 1
+                ? jumpToStep(1)
+                : () => {
+                    console.log("undefined step 1 clicked");
+                    return undefined;
+                  }
+            }
+            href="/"
+          >
+            <span className={styles.accent}>✓</span>
           </Link>
           <h4>Købere</h4>
         </li>
@@ -56,4 +67,11 @@ export function Stepper({ currentStep, setCurrentStep }) {
       </ul>
     </nav>
   );
+}
+
+{
+  /*    <Link
+            onClick={(e) => (currentStep > 1 ? nextStep(e) : console.log("no"))}
+            href="/"
+          > <span className={styles.accent}>✓</span>  </Link>*/
 }
