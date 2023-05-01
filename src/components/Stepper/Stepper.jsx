@@ -13,7 +13,11 @@ export function Stepper({ currentStep, setCurrentStep }) {
   return (
     <nav className={styles.stepper}>
       <ul>
-        <li className={currentStep > 1 ? styles.done : styles.active}>
+        <li
+          className={`${currentStep === 1 ? styles.active : ""} ${
+            currentStep > 1 ? styles.done : ""
+          }`} /*GPT */
+        >
           <Link
             onClick={() =>
               currentStep > 1
