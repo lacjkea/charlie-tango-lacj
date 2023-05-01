@@ -86,7 +86,7 @@ export default function Home() {
               />
             </label>
             <label htmlFor="price">
-              <span className={cstyles.label}>Forventet pris i DKK</span>
+              <span className={cstyles.label}>Forventet pris</span>
               <input
                 name="noname"
                 onChange={updatePrice}
@@ -96,16 +96,19 @@ export default function Home() {
                 max="20000000"
                 step="50000"
               ></input>
-              <input
-                name="price"
-                type="text"
-                onChange={updatePrice}
-                value={price}
-                ref={inputTextPriceEl}
-                inputMode="numeric"
-                pattern="[0-9]+"
-                title="The price should be digits (0 to 9)."
-              />
+              <div className={cstyles.centerbox}>
+                <input
+                  name="price"
+                  type="text"
+                  onChange={updatePrice}
+                  value={price}
+                  ref={inputTextPriceEl}
+                  inputMode="numeric"
+                  pattern="[0-9]+"
+                  title="The price should be digits (0 to 9)."
+                />
+                <span>DKK</span>
+              </div>
             </label>
             <button className={cstyles.button} type="submit">
               Find købere

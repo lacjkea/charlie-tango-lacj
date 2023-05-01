@@ -127,6 +127,20 @@ form .label {
   margin-bottom: calc(2 * var(--space-input));
 }
 
+.centerbox {
+  display: grid;
+  grid-template-columns: auto auto;
+  justify-items: stretch;
+  align-items: center;
+  justify-content: center;
+}
+
+.centerbox span {
+  margin-left: var(--space-input);
+}
+.textarea {
+  width: 50%;
+}
 /* lacj */
 
 /* .style-title-h1 {

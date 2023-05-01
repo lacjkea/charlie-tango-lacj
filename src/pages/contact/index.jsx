@@ -3,19 +3,26 @@ import { useRouter } from "next/router";
 import { useState, useRef, useEffect } from "react";
 import cstyles from "./../../styles/Common.module.css";
 // import styles from "./Contact.module.css";
-import { getEstateType } from "@/data/estateTypes";
+// import { getEstateType } from "@/data/estateTypes";
 
 export default function Contact() {
   const formEl = useRef(null);
-  const { query } = useRouter();
-  console.log("query", query);
+  const router = useRouter();
+  // const contact_ids = router.query.contact_ids;
+  const [contactList, updateList] = useState([]);
+  // console.log("query", router);
+  useEffect(() => {
+    if (router.isReady) {
+      updateList(router.query.contact_ids);
+      console.log("loglist", router.query.contact_ids);
+    }
+  }, [router.isReady, router.query.contact_ids]);
   //   const contact_ids = query.contact_ids;
-  //   const contact_ids = query.contact_ids;
-  const [contactList, updateList] = useState([
+  /* const [contactList, updateList] = useState([
     "9751a565",
     "8b9098de",
     "0678a67a",
-  ]);
+  ]); */
   //   console.log(contactList);
   //   console.log("contact_ids", query.contact_ids);
 
@@ -58,24 +65,22 @@ export default function Contact() {
     e.preventDefault();
     console.log(formEl.current.elements);
     const formValues = formEl.current.elements;
-    // console.log("contactids", formValues.contacts.values);
+    console.log("contactids", formValues.contacts);
 
-    let contact_ids = [];
+    let final_contact_ids = [];
     formValues.contacts.forEach((ct) => {
       console.log(ct.value);
-      contact_ids.push(ct.value);
+      final_contact_ids.push(ct.value);
     });
-    // console.log("cts", contact_ids);
-
+    // console.log("final_contact_ids", final_contact_ids);
     // return false;
-    // alert("nononono");
 
     // construct an Object for supabase
     const payload = {
       fname: formValues.fname.value,
       email: formValues.email.value,
       phone: formValues.phone.value,
-      contactids: contact_ids,
+      contactids: final_contact_ids,
       consent: formValues.consent.value,
       message: formValues.message.value,
     };
@@ -88,6 +93,7 @@ export default function Contact() {
     })
       .then((res) => res.json())
       .then((data) => afterSubmit(data));
+
     function afterSubmit(data) {
       console.log("data", data.response);
       if (data.response.code) {
@@ -106,107 +112,84 @@ export default function Contact() {
         <title>3:4 Kontakt | EDC</title>
       </Head>
       <div className="wrapper">
-        <div className={cstyles.content}>
-          <h1 className={cstyles.headline}>3. Kontakt potentielle købere</h1>
-          <form
-            action="/thanks"
-            onSubmit={submitted}
-            method="GET"
-            className={cstyles.form}
-            ref={formEl}
-          >
-            {/* lacj */}
-            <div className={cstyles["buyer-cards"]}>
-              <ul className={cstyles.label}>
-                {contactList.map((singleContact) => (
-                  <li key={singleContact}>
-                    <input
-                      type="hidden"
-                      name="contacts"
-                      value={singleContact}
-                    />
-                    Ref: {singleContact}
-                    <button
-                      onClick={() => removeContact({ singleContact })}
-                      type="button"
-                    >
-                      Fjern
-                    </button>
-                  </li>
-                ))}
-              </ul>
-              <label>
-                <span className={cstyles.label}>Name *</span>
-                <input type="text" name="fname" id="fname" required />
-              </label>
-              <label>
-                <span className={cstyles.label}>Email *</span>
-                <input type="email" name="email" id="email" />
-              </label>
-              <label>
-                <span className={cstyles.label}>Phone *</span>
-                <input type="tel" name="phone" id="phone" />
-                {/*  inputMode="numeric" */}
-              </label>
-              <label>
-                <input type="checkbox" name="consent" id="consent" value="1" />
-                Ja tak. EDC må gerne kontakte mig med (andre?) tilbud og
-                information relateret til ejendomshandel.
-              </label>
-              <label htmlFor="message">
-                <span className={cstyles.label}>Evt. besked</span>
-                <textarea
-                  name="message"
-                  id="message"
-                  cols="30"
-                  rows="10"
-                ></textarea>
-              </label>
-
-              <button className={cstyles.button} type="submit">
-                Kontakt købere
-              </button>
-            </div>
-            {/* .buyer-cards */}
-          </form>
-          <p>
-            On this page you get the <code>`query`</code> params like{" "}
-            <code>`zipCode`</code>, and can use them to fetch a list of buyers
-            from the API.
-          </p>
-          <p>
-            Make sure to read the docs on how to fetch data on a page - There
-            are multiple ways of doing it, and you should choose the one that
-            fits your solution best.
-          </p>
-          <ul>
-            <li>
-              <a
-                href="https://nextjs.org/docs/basic-features/data-fetching/get-server-side-props"
-                target="_blank"
-              >
-                next.js - Data fetching
-              </a>
-            </li>
-            <li>
-              <a
-                href="https://react.dev/learn/synchronizing-with-effects#fetching-data"
-                target="_blank"
-              >
-                react.dev - Fetching data
-              </a>
-            </li>
-          </ul>
+        <main>
           <div className={cstyles.content}>
-            <h2>Query params:</h2>
+            <h1 className={cstyles.headline}>3. Kontakt potentielle købere</h1>
+            <form
+              action="/thanks"
+              onSubmit={submitted}
+              method="GET"
+              className={cstyles.form}
+              ref={formEl}
+            >
+              {/* lacj */}
+              <div className={cstyles["buyer-cards"]}>
+                <ul className={cstyles.label}>
+                  {contactList.map((singleContact) => (
+                    <li key={singleContact}>
+                      <input
+                        type="hidden"
+                        name="contacts"
+                        value={singleContact}
+                      />
+                      Ref: {singleContact}
+                      <button
+                        onClick={() => removeContact({ singleContact })}
+                        type="button"
+                      >
+                        Fjern
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+                <label>
+                  <span className={cstyles.label}>Name *</span>
+                  <input type="text" name="fname" id="fname" required />
+                </label>
+                <label>
+                  <span className={cstyles.label}>Email *</span>
+                  <input type="email" name="email" id="email" />
+                </label>
+                <label>
+                  <span className={cstyles.label}>Phone *</span>
+                  <input type="tel" name="phone" id="phone" />
+                  {/*  inputMode="numeric" */}
+                </label>
+                <label>
+                  <input
+                    type="checkbox"
+                    name="consent"
+                    id="consent"
+                    value="1"
+                  />
+                  Ja tak. EDC må gerne kontakte mig med (andre?) tilbud og
+                  information relateret til ejendomshandel.
+                </label>
+                <label htmlFor="message">
+                  <span className={cstyles.label}>Evt. besked</span>
+                  <textarea
+                    className={cstyles.textarea}
+                    name="message"
+                    id="message"
+                    cols="30"
+                    rows="2"
+                  ></textarea>
+                </label>
+
+                <button className={cstyles.button} type="submit">
+                  Kontakt købere
+                </button>
+              </div>
+              {/* .buyer-cards */}
+            </form>
+            {/*        <h2>Query params:</h2>
             <pre>
               <code>{JSON.stringify(query, null, 2)}</code>
-            </pre>
+            </pre> */}
           </div>
-        </div>
+        </main>
       </div>
       {/* wrapper */}
-      <main></main>
     </>
   );
 }
