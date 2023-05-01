@@ -2,6 +2,7 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Head from "next/head";
+import DOMPurify from "dompurify";
 import cstyles from "./../../styles/Common.module.css";
 import styles from "./Buyers.module.css";
 import iconBoligtype from "./../../assets/icon-boligtype.svg";
@@ -12,13 +13,12 @@ import iconCalendar from "./../../assets/icon-calendar.svg";
 import { getEstateType } from "@/data/estateTypes";
 
 // console.log(iconBoligtype);
-export default function Buyers({ setCurrentStep }) {
+export default function Buyers({ currentStep, setCurrentStep }) {
   const router = useRouter();
 
   // console.log("query", query);
   const [buyers, setBuyers] = useState([]);
 
-  setCurrentStep(2);
   //console.log("currentStep!", currentStep);
 
   // console.log("zipCode", query.zipCode);
@@ -37,7 +37,8 @@ export default function Buyers({ setCurrentStep }) {
         });
     }
     // sessionStorage.setItem("sellerinfo", )
-  }, [router]);
+    setCurrentStep(2);
+  }, [router, setCurrentStep]);
 
   return (
     <>
@@ -80,9 +81,11 @@ export default function Buyers({ setCurrentStep }) {
                       </svg>
                       <p
                         dangerouslySetInnerHTML={{
-                          __html: singleBuyer.description.replace(
-                            "m2",
-                            "m<sup>2</sup>"
+                          __html: DOMPurify.sanitize(
+                            singleBuyer.description.replace(
+                              "m2",
+                              "m<sup>2</sup>"
+                            )
                           ),
                         }}
                       />
