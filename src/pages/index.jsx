@@ -2,12 +2,18 @@ import Head from "next/head";
 // import styles from "./Home.module.css";
 import cstyles from "./../styles/Common.module.css";
 import { estateTypes } from "@/data/estateTypes";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 
-export default function Home() {
+export default function Home({ currentStep, setCurrentStep }) {
   const [price, setPrice] = useState(0);
+  const [size, setSize] = useState(50);
   // const inputRangePriceEl = useref(null);
   const inputTextPriceEl = useRef(null);
+  const inputTextSizeEl = useRef(null);
+
+  useEffect(() => {
+    setCurrentStep(1);
+  }, [setCurrentStep]);
 
   function updatePrice(e) {
     setPrice(e.target.value);
@@ -15,18 +21,23 @@ export default function Home() {
     inputTextPriceEl.current.focus();
   }
 
+  function updateSize(e) {
+    setSize(e.target.value);
+    // console.log("hey", inputTextPriceEl);
+    inputTextSizeEl.current.focus();
+  }
+
   return (
     <>
       <Head>
-        {/*      <title>1 - Find buyer | EDC</title> */}
         <title>1:4 Sælg din bolig | EDC</title>
       </Head>
       <div className="wrapper">
+        <h1 className={cstyles.headline}>
+          1. Sælg din <span className={cstyles.accent}>bolig</span>
+        </h1>
         <div className={cstyles.content}>
-          <h1 className={cstyles.headline}>
-            1. Sælg <span className={cstyles.accent}>din</span> gamle bolig -
-            v.23:14
-          </h1>
+          <h3>Information om din bolig</h3>
           {/* Read this: https://nextjs.org/docs/guides/building-forms (they said) */}
           <form
             action="/buyers"
@@ -72,33 +83,39 @@ export default function Home() {
                 })}
               </select>
             </label>
-            <label>
-              <span className={cstyles.label}>
-                Størrelse i kvadrameter (m<sup>2</sup>) *
-              </span>
-              <input
-                name="size_m2"
-                type="text"
-                defaultValue={40}
-                minLength="2"
-                maxLength="4"
-                inputMode="numeric"
-                title="The size in square meters should be digits (0 to 9)."
-                pattern="[0-9]{2,4}"
-                required
-              />
+            <label htmlFor="size_m2">
+              <span className={cstyles.label}>Størrelse *</span>
+              <div className={cstyles.centerbox}>
+                <input
+                  onChange={updateSize}
+                  name="size_m2"
+                  type="text"
+                  ref={inputTextSizeEl}
+                  // defaultValue={50}
+                  value={size}
+                  minLength="2"
+                  maxLength="4"
+                  inputMode="numeric"
+                  title="The size in square meters should be digits (0 to 9)."
+                  pattern="[0-9]{2,4}"
+                  required
+                />
+                <span>
+                  m<sup>2</sup>
+                </span>
+                <input
+                  // name="noname"
+                  onChange={updateSize}
+                  type="range"
+                  value={size}
+                  min="0"
+                  max="500"
+                  step="1"
+                ></input>
+              </div>
             </label>
             <label htmlFor="price">
               <span className={cstyles.label}>Forventet pris</span>
-              <input
-                // name="noname"
-                onChange={updatePrice}
-                type="range"
-                value={price || 1000000}
-                min="0"
-                max="20000000"
-                step="50000"
-              ></input>
               <div className={cstyles.centerbox}>
                 <input
                   name="price"
@@ -110,7 +127,17 @@ export default function Home() {
                   pattern="[0-9]+"
                   title="The price should be digits (0 to 9)."
                 />
-                <span>DKK</span>
+                <span>kr.</span>
+
+                <input
+                  // name="noname"
+                  onChange={updatePrice}
+                  type="range"
+                  value={price || 1000000}
+                  min="0"
+                  max="20000000"
+                  step="50000"
+                ></input>
               </div>
             </label>
             <button className={cstyles.button} type="submit">

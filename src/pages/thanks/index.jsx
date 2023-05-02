@@ -12,14 +12,18 @@ export default function Thanks({ setCurrentStep }) {
   return (
     <>
       <Head>
-        <title>4:4 Tak skal du have | EDC</title>
+        <title>4:4 Vi kontakter dig | EDC</title>
       </Head>
       <div className="wrapper">
+        <h1 className={cstyles.headline}>
+          4. Vi <span className={cstyles.accent}>kontakter</span> dig
+        </h1>
         <div className={cstyles.content}>
-          <h1 className={cstyles.headline}>
-            4. Tak skal <span className={cstyles.accent}>du</span> have
-          </h1>
-          <h2>Du hører fra os indenfor 1-2 hverdage.</h2>
+          <h3>Tak skal du have.</h3>
+          <p>
+            Vi kontakter dig indenfor 1-2 hverdage med mere information om
+            potentielle købere af din bolig.
+          </p>
         </div>
       </div>
     </>

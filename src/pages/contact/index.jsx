@@ -113,98 +113,97 @@ export default function Contact({ currentStep, setCurrentStep }) {
   return (
     <>
       <Head>
-        <title>3:4 Kontakt | EDC</title>
+        <title>3:4 Din Kontaktinfo | EDC</title>
       </Head>
       <div className="wrapper">
-        <main>
-          <div className={cstyles.content}>
-            <h1 className={cstyles.headline}>3. Kontakt potentielle købere</h1>
-            <form
-              action="/thanks"
-              onSubmit={submitted}
-              method="GET"
-              className={cstyles.form}
-              ref={formEl}
-              autoComplete="on"
-            >
-              {/* lacj */}
-              <div className={cstyles["buyer-cards"]}>
-                <ul className={cstyles.label}>
-                  {!contactList ? (
-                    <>
-                      <p>
-                        <em>Ingen købere? </em>
-                      </p>
-                      <p>
-                        Det tror vi ikke på. Skal vi hjælpe dig med at finde en
-                        køber?
-                      </p>
-                    </>
-                  ) : (
-                    contactList.map((singleContact) => (
-                      <li key={singleContact}>
-                        <input
-                          type="hidden"
-                          name="contacts"
-                          value={singleContact}
-                        />
-                        Ref: {singleContact}
-                        <button
-                          onClick={() => removeContact({ singleContact })}
-                          type="button"
-                        >
-                          Fjern
-                        </button>
-                      </li>
-                    ))
-                  )}
-                </ul>
-                <label>
-                  <span className={cstyles.label}>Navn *</span>
-                  <input type="text" name="fname" id="fname" required />
-                </label>
-                <label>
-                  <span className={cstyles.label}>Email *</span>
-                  <input type="email" name="email" id="email" />
-                </label>
-                <label>
-                  <span className={cstyles.label}>Telefon *</span>
-                  <input type="tel" name="phone" id="phone" />
-                  {/*  inputMode="numeric" */}
-                </label>
-                <label>
-                  <input
-                    type="checkbox"
-                    name="consent"
-                    id="consent"
-                    value="1"
-                  />
-                  Ja tak. EDC må gerne kontakte mig med (andre?) tilbud og
-                  information relateret til ejendomshandel.
-                </label>
-                <label htmlFor="message">
-                  <span className={cstyles.label}>Evt. besked</span>
-                  <textarea
-                    className={cstyles.textarea}
-                    name="message"
-                    id="message"
-                    cols="30"
-                    rows="2"
-                  ></textarea>
-                </label>
+        <h1 className={cstyles.headline}>
+          3. Din <span className={cstyles.accent}>kontaktinfo</span>rmation
+        </h1>
+        <div className={cstyles.content}>
+          <h3>
+            Fortæl, hvordan du gerne vil kontaktes for at få adgang til vores
+            køberkartotek
+          </h3>
+          <form
+            action="/thanks"
+            onSubmit={submitted}
+            method="GET"
+            className={cstyles.form}
+            ref={formEl}
+            autoComplete="on"
+          >
+            {/* lacj */}
+            <div className={cstyles["buyer-cards"]}>
+              <ul className={cstyles.label}>
+                {!contactList ? (
+                  <>
+                    <p>
+                      <em>Ingen købere? </em>
+                    </p>
+                    <p>
+                      Det tror vi ikke på. Skal vi hjælpe dig med at finde en
+                      køber?
+                    </p>
+                  </>
+                ) : (
+                  contactList.map((singleContact) => (
+                    <li key={singleContact}>
+                      <input
+                        type="hidden"
+                        name="contacts"
+                        value={singleContact}
+                      />
+                      Ref: {singleContact}
+                      <button
+                        onClick={() => removeContact({ singleContact })}
+                        type="button"
+                      >
+                        Fjern
+                      </button>
+                    </li>
+                  ))
+                )}
+              </ul>
+              <label>
+                <span className={cstyles.label}>Dit navn *</span>
+                <input type="text" name="fname" id="fname" required />
+              </label>
+              <label>
+                <span className={cstyles.label}>Email *</span>
+                <input type="email" name="email" id="email" />
+              </label>
+              <label>
+                <span className={cstyles.label}>Telefon *</span>
+                <input type="tel" name="phone" id="phone" />
+                {/*  inputMode="numeric" */}
+              </label>
+              <label>
+                <input type="checkbox" name="consent" id="consent" value="1" />
+                Ja tak. EDC må gerne kontakte mig med (andre?) tilbud og
+                information relateret til ejendomshandel.
+              </label>
+              <label htmlFor="message">
+                <span className={cstyles.label}>Evt. besked</span>
+                <textarea
+                  className={cstyles.textarea}
+                  name="message"
+                  id="message"
+                  cols="30"
+                  rows="2"
+                ></textarea>
+              </label>
 
-                <button className={cstyles.button} type="submit">
-                  Kontakt købere
-                </button>
-              </div>
-              {/* .buyer-cards */}
-            </form>
-            {/*        <h2>Query params:</h2>
+              <button className={cstyles.button} type="submit">
+                Send din kontaktinformation til EDC
+              </button>
+            </div>
+            {/* .buyer-cards */}
+          </form>
+          {/*        <h2>Query params:</h2>
             <pre>
               <code>{JSON.stringify(query, null, 2)}</code>
             </pre> */}
-          </div>
-        </main>
+        </div>
       </div>
       {/* wrapper */}
     </>
