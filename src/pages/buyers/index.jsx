@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 import { getEstateName } from "@/data/estateTypes";
 import { useState, useEffect, useRef } from "react";
@@ -17,9 +18,12 @@ import { displayDate } from "@/data/helpers";
 // console.log(iconBoligtype);
 export default function Buyers({ currentStep, setCurrentStep }) {
   const router = useRouter();
+  // console.log("router", router);
 
   // console.log("query", query);
   const [buyers, setBuyers] = useState([]);
+  const headlineRef = useRef(null);
+  const zipcodeRef = useRef(null);
 
   // console.log("pricematter", priceFormatter.format(2000));
 
@@ -32,8 +36,31 @@ export default function Buyers({ currentStep, setCurrentStep }) {
   // /* const displayZipCode = useRef(null);
   // displayZipCode = q.zipCode; */
   // const displayEstateName = useRef(getEstateName(q.estateType) + "-");
+  // const headlinetemp = `${getEstateName(sessionStorage.getItem("estateType")
+  // ) || "2200"}
+  //
+
+  // {sessionStorage.getItem("zipCode")}`;
+  // {/* {console.log("q.estateType", q.estateType)} */} i{" "}
   useEffect(() => {
+    const headline = getEstateName(
+      sessionStorage.getItem("estateType")
+    ).toLowerCase();
+    headlineRef.current.textContent = headline;
+
+    zipcodeRef.current.textContent = sessionStorage.getItem("zipCode");
+
+    // cons    zipCodeRef;
+
+    // setZipCode(tempZipCode);
+
+    // )
     setCurrentStep(2);
+    if (sessionStorage.getItem("buyers")) {
+      // setBuyers(JSON.parse())
+      // console.log("BBBB", s+ essionStorage.getItem("buyerinfo"));
+      setBuyers(JSON.parse(sessionStorage.getItem("buyers")));
+    }
     // if (router.isReady) {
     if (q && q.zipCode) {
       console.log("q", q);
@@ -42,14 +69,21 @@ export default function Buyers({ currentStep, setCurrentStep }) {
       )
         .then((res) => res.json())
         .then((data) => {
-          setBuyers(data); //lacj todo: clean up data
+          handleFetched(data); //lacj todo: clean up data
         });
-    } else {
-      return;
     }
-
     // sessionStorage.setItem("sellerinfo", )
-  }, [q, router, setCurrentStep]);
+    // }, [q, router, setCurrentStep]);
+  }, [q]);
+
+  function handleFetched(data) {
+    // console.log(data);
+    sessionStorage.setItem("sellerinfo", JSON.stringify(router.query));
+    sessionStorage.setItem("queryString", router.asPath);
+    setBuyers(data);
+    sessionStorage.setItem("buyers", JSON.stringify(data));
+    setBuyers(data);
+  }
 
   return (
     <>
@@ -67,9 +101,9 @@ export default function Buyers({ currentStep, setCurrentStep }) {
             width={48}
             height={48}
           />
-          {router.isReady && getEstateName(q.estateType).toLowerCase()}-
-          <span className={cstyles.accent}>købere</span>
-          {/* {console.log("q.estateType", q.estateType)} */} i {q.zipCode}
+          <span ref={headlineRef}></span>-
+          <span className={cstyles.accent}>købere</span> i{" "}
+          <span ref={zipcodeRef}></span>
         </h1>
         <div className={cstyles.content}>
           <h3>Vælg købere, du gerne vil i kontakt med</h3>

@@ -11,8 +11,11 @@ export default function Home({ currentStep, setCurrentStep }) {
   const inputTextPriceEl = useRef(null);
   const inputTextSizeEl = useRef(null);
 
+  const formEl = useRef(null);
+
   useEffect(() => {
     setCurrentStep(1);
+    sessionStorage.clear();
   }, [setCurrentStep]);
 
   function updatePrice(e) {
@@ -25,6 +28,17 @@ export default function Home({ currentStep, setCurrentStep }) {
     setSize(e.target.value);
     // console.log("hey", inputTextPriceEl);
     inputTextSizeEl.current.focus();
+  }
+
+  //quick fix... ugly?
+  function setSellerEstateInfo(e) {
+    // e.preventDefault();
+    console.log(formEl.current.elements);
+    const formValues = formEl.current.elements;
+    sessionStorage.setItem("zipCode", formValues.zipCode.value);
+    sessionStorage.setItem("estateType", formValues.estateType.value);
+    sessionStorage.setItem("size_m2", formValues.size_m2.value);
+    sessionStorage.setItem("price", formValues.price.value);
   }
 
   return (
@@ -44,6 +58,7 @@ export default function Home({ currentStep, setCurrentStep }) {
             method="GET"
             className={cstyles.form + " sell"}
             autoComplete="on"
+            ref={formEl}
           >
             <label>
               <span className={cstyles.label}>Postnummer *</span>
@@ -140,7 +155,11 @@ export default function Home({ currentStep, setCurrentStep }) {
                 ></input>
               </div>
             </label>
-            <button className={cstyles.button} type="submit">
+            <button
+              className={cstyles.button}
+              onClick={setSellerEstateInfo}
+              type="submit"
+            >
               Find købere
             </button>
           </form>

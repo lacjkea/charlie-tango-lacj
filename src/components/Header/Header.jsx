@@ -4,7 +4,9 @@ import Image from "next/image";
 import styles from "./Header.module.css";
 import Link from "next/link";
 
-export function Header({ currentStep, setCurrentStep }) {
+export function Header({ shouldRender, currentStep, setCurrentStep }) {
+  // console.clear();
+  // console.log("shiouldrender", shouldRender);
   return (
     <header className="wrapper">
       <Link href="/" aria-label="EDC">
@@ -17,10 +19,12 @@ export function Header({ currentStep, setCurrentStep }) {
           priority
         />
       </Link>
-      <Stepper
-        currentStep={currentStep}
-        setCurrentStep={setCurrentStep}
-      ></Stepper>
+      {shouldRender && (
+        <Stepper
+          currentStep={currentStep}
+          setCurrentStep={setCurrentStep}
+        ></Stepper>
+      )}
     </header>
   );
 }
