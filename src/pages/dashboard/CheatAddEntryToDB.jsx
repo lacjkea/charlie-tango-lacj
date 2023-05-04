@@ -7,7 +7,8 @@ export default function CheatAddEntryToDB({ sellers, setSellers }) {
       contactids: ["9751a565", "38e485a2"],
       consent: true,
       message: "hejdav!",
-      seller_estate_info: sessionStorage.getItem("sellerinfo"),
+      seller_estate_info:
+        '{"zipCode":"2500","estateType":"5","size_m2":"112","price":"1111111"}',
     };
 
     fetch("/api/add-contactlist", {
