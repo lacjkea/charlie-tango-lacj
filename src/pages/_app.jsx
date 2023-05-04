@@ -8,7 +8,8 @@ export default function App({ Component, pageProps }) {
   const router = useRouter();
   const [currentStep, setCurrentStep] = useState(1);
 
-  const shouldRenderComponent = router.pathname !== "/dashboard";
+  const shouldRenderComponent =
+    router.pathname !== "/dashboard" && router.pathname !== "/thanks";
   // function nextStep(e) {
   //   e.preventDefault();
   //   setCurrentStep(currentStep + 1);

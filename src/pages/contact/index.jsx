@@ -6,14 +6,17 @@ import cstyles from "./../../styles/Common.module.css";
 // import { getEstateType } from "@/data/estateTypes";
 
 export default function Contact({ currentStep, setCurrentStep }) {
+  const [contactList, updateList] = useState([]);
   const formEl = useRef(null);
+
+  const submitBtn = useRef(null);
   const router = useRouter();
   // const contact_ids = router.query.contact_ids;
-  const [contactList, updateList] = useState([]);
   // console.log("query", router);
   useEffect(() => {
     setCurrentStep(3);
     if (router.isReady) {
+      router.query.contact_ids &&
       updateList(router.query.contact_ids);
       console.log("loglist", router.query.contact_ids);
     }
@@ -64,18 +67,18 @@ export default function Contact({ currentStep, setCurrentStep }) {
 
   function submitted(e) {
     e.preventDefault();
+    submitBtn.current.disabled = true;
     console.log(formEl.current.elements);
     const formValues = formEl.current.elements;
     console.log("contactids", formValues.contacts);
 
     let final_contact_hiddenform_ids = [];
-    //sender "none", hvis ingen købere er valgt/fundet
-    !formValues.contacts
-      ? final_contact_hiddenform_ids.push("none")
-      : formValues.contacts.forEach((ct) => {
-          console.log(ct.value);
-          final_contact_hiddenform_ids.push(ct.value);
-        });
+    formValues.contacts &&
+      formValues.contacts.forEach((ct) => {
+        console.log(ct.value);
+        final_contact_hiddenform_ids.push(ct.value);
+      });
+
     // console.log("final_contact_ids", final_contact_ids);
     // return false;
 
@@ -87,6 +90,7 @@ export default function Contact({ currentStep, setCurrentStep }) {
       contactids: final_contact_hiddenform_ids,
       consent: formValues.consent.value,
       message: formValues.message.value,
+      seller_estate_info: sessionStorage.getItem("sellerinfo"),
     };
     fetch("/api/add-contactlist", {
       method: "POST",
@@ -103,8 +107,7 @@ export default function Contact({ currentStep, setCurrentStep }) {
       if (data.response.code) {
         alert(data.response.code + " " + data.response.message);
       } else {
-        /*   alert("yas");
-        console.log(e); */
+        //submit the form if everything is OK
         e.target.submit();
       }
     }
@@ -121,7 +124,7 @@ export default function Contact({ currentStep, setCurrentStep }) {
         </h1>
         <div className={cstyles.content}>
           <h3>
-            Fortæl, hvordan du gerne vil kontaktes for at få adgang til vores
+            Giv os dine kontaktoplysninger for at få adgang til vores
             køberkartotek
           </h3>
           <form
@@ -135,7 +138,7 @@ export default function Contact({ currentStep, setCurrentStep }) {
             {/* lacj */}
             <div className={cstyles["buyer-cards"]}>
               <ul className={cstyles.label}>
-                {!contactList ? (
+                {!contactList.length ? (
                   <>
                     <p>
                       <em>Ingen købere? </em>
@@ -193,7 +196,7 @@ export default function Contact({ currentStep, setCurrentStep }) {
                 ></textarea>
               </label>
 
-              <button className={cstyles.button} type="submit">
+              <button className={cstyles.button} type="submit" ref={submitBtn}>
                 Send din kontaktinformation til EDC
               </button>
             </div>

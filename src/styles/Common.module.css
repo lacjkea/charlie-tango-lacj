@@ -15,7 +15,7 @@
 }
 
 .headline img {
-  vertical-align: top;
+  vertical-align: text-bottom;
 }
 
 .accent {
@@ -135,11 +135,11 @@
 }
 
 .form [name="fname"] {
-  width: 40ch;
+  width: 100%;
 }
 
 .form [name="email"] {
-  width: 30ch;
+  width: 100%;
 }
 
 .form [name="phone"] {
@@ -173,12 +173,16 @@ form .label {
   max-width: 800px;
 }
 
+.form [type="submit"] {
+  width: 100%;
+}
+
 /* .centerbox span {
   margin-left: var(--space-input);
 } */
 
 .textarea {
-  width: 50%;
+  width: 100%;
 }
 /* lacj */
 

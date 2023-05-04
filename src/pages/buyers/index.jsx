@@ -24,6 +24,7 @@ export default function Buyers({ currentStep, setCurrentStep }) {
   const [buyers, setBuyers] = useState([]);
   const headlineRef = useRef(null);
   const zipcodeRef = useRef(null);
+  const mainCardEl = useRef(null);
 
   // console.log("pricematter", priceFormatter.format(2000));
 
@@ -85,6 +86,16 @@ export default function Buyers({ currentStep, setCurrentStep }) {
     setBuyers(data);
   }
 
+  function toggleDetails(e) {
+    console.log(e.currentTarget.textContent);
+
+    e.currentTarget.previousElementSibling.classList.toggle("hidden");
+    e.currentTarget.textContent == "Se mindre"
+      ? (e.currentTarget.textContent = "Læs mere")
+      : (e.currentTarget.textContent = "Se mindre"); //store state in array? lacj
+    // console.log(mainCardEl.current.classList.toogle("hidden"));
+  }
+
   return (
     <>
       <Head>
@@ -105,81 +116,117 @@ export default function Buyers({ currentStep, setCurrentStep }) {
           <span className={cstyles.accent}>købere</span> i{" "}
           <span ref={zipcodeRef}></span>
         </h1>
-        <div className={cstyles.content}>
-          <h3>Vælg købere, du gerne vil i kontakt med</h3>
+        {/* <div className={cstyles.content}> lacj!!! */}
+        <div className="fixDet">
+          <h3>Vælg købere, du vil i kontakt med</h3>
           <form action="/contact" method="GET" className={cstyles.form}>
             <div className={styles["buyer-cards"]}>
               {buyers.map((singleBuyer) => (
                 <label className={styles["buyer-card"]} key={singleBuyer.id}>
                   {console.log(singleBuyer)}
                   <article>
-                    <input
-                      className="visual-hidden"
-                      type="checkbox"
-                      value={singleBuyer.id}
-                      name="contact_ids" //lacj
-                    />
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="48"
-                      height="48"
-                      viewBox="0 0 24 24"
-                      aria-hidden="true"
+                    <section className={styles.topCard}>
+                      <div>
+                        <Image src={iconMinArea} alt="" aria-hidden="true" />
+                        <p>
+                          {singleBuyer.minSize}{" "}
+                          <span>
+                            m<sup>2</sup>
+                          </span>
+                        </p>
+                      </div>
+                      <div>
+                        <Image src={iconBudget} alt="" aria-hidden="true" />
+                        <p>{priceFormatter.format(singleBuyer.maxPrice)}</p>
+                      </div>
+                      <div>
+                        <input
+                          className="visual-hidden"
+                          type="checkbox"
+                          value={singleBuyer.id}
+                          name="contact_ids" //lacj
+                        />
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="48"
+                          height="48"
+                          viewBox="0 0 24 24"
+                          aria-hidden="true"
+                        >
+                          <path
+                            // fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            d="M12 18.573l6.894-7.015a3.898 3.898 0 0 0 0-5.44 3.698 3.698 0 0 0-5.298 0L12 7.742l-1.596-1.624a3.698 3.698 0 0 0-5.298 0 3.898 3.898 0 0 0 0 5.44L12 18.573z"
+                          />
+                        </svg>
+                      </div>
+                      <p>Ref. {singleBuyer.id}</p>
+                    </section>
+
+                    <section
+                      className={styles.maincard + " hidden"}
+                      ref={mainCardEl}
                     >
-                      <path
-                        // fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        d="M12 18.573l6.894-7.015a3.898 3.898 0 0 0 0-5.44 3.698 3.698 0 0 0-5.298 0L12 7.742l-1.596-1.624a3.698 3.698 0 0 0-5.298 0 3.898 3.898 0 0 0 0 5.44L12 18.573z"
+                      <p
+                        dangerouslySetInnerHTML={{
+                          __html: DOMPurify.sanitize(
+                            singleBuyer.description.replace(
+                              "m2",
+                              "m<sup>2</sup>"
+                            )
+                          ),
+                        }}
                       />
-                    </svg>
-                    <p
-                      dangerouslySetInnerHTML={{
-                        __html: DOMPurify.sanitize(
-                          singleBuyer.description.replace("m2", "m<sup>2</sup>")
-                        ),
-                      }}
-                    />
-                    {/*             <p>
+                      {/*             <p>
                         {singleBuyer.description.replace("m2", "m<sup>2</sup>")}
                       </p> */}
-                    {/* <div>
+                      {/* <div>
                       <Image src={iconBoligtype} alt="" aria-hidden="true" />
                       <p>{getEstateName(singleBuyer.estateType)}</p>
                     </div> */}
-                    {/* prettier-ignore */}
-                    <div>
-                      <Image src={iconMinArea} alt="" aria-hidden="true" />
+                      {/* prettier-ignore */}
+                      <div>
+                      <Image src={iconMinArea} alt="" aria-hidden="true" title="størrelse" />
                       <p>min. {singleBuyer.minSize} <span>m<sup>2</sup></span>
                       </p>
                     </div>
-                    <div>
-                      <Image src={iconBudget} alt="" aria-hidden="true" />
-                      <p>max. {priceFormatter.format(singleBuyer.maxPrice)}</p>
-                    </div>
-                    <div>
-                      <Image src={iconCalendar} alt="" aria-hidden="true" />
-                      <p>
-                        Overtagelse fra {displayDate(singleBuyer.takeoverDate)}
-                      </p>
-                    </div>
-                    <div>
-                      <Image src={iconFamily} alt="" aria-hidden="true" />
-                      <p>
-                        {singleBuyer.adults + singleBuyer.children - 1
-                          ? `Familie på ${
-                              singleBuyer.adults + singleBuyer.children
-                            }`
-                          : //personer`
-                            "1 person"}
-                      </p>
-                    </div>
-                    <p>Ref. {singleBuyer.id}</p>
+                      <div>
+                        <Image src={iconBudget} alt="" aria-hidden="true" />
+                        <p>
+                          max. {priceFormatter.format(singleBuyer.maxPrice)}
+                        </p>
+                      </div>
+                      <div>
+                        <Image src={iconCalendar} alt="" aria-hidden="true" />
+                        <p>Fra {displayDate(singleBuyer.takeoverDate)}</p>
+                      </div>
+                      <div>
+                        <Image src={iconFamily} alt="" aria-hidden="true" />
+                        <p>
+                          {singleBuyer.adults + singleBuyer.children - 1
+                            ? `Familie på ${
+                                singleBuyer.adults + singleBuyer.children
+                              }`
+                            : //personer`
+                              "1 person"}
+                        </p>
+                      </div>
+                    </section>
+                    <button
+                      type="button"
+                      // className={cstyles.button}
+                      onClick={toggleDetails}
+                    >
+                      Læs mere
+                    </button>
                   </article>
                 </label>
               ))}
             </div>
-            <button className={cstyles.button}>Gem potentielle købere</button>
+            <button className={cstyles.button} type="submit">
+              Gem potentielle købere
+            </button>
           </form>
 
           {/*   <div className={styles.content}>

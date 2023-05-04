@@ -3,6 +3,7 @@ import Head from "next/head";
 import cstyles from "./../styles/Common.module.css";
 import { estateTypes } from "@/data/estateTypes";
 import { useRef, useState, useEffect } from "react";
+import { priceFormatter } from "@/data/buyerProfiles";
 
 export default function Home({ currentStep, setCurrentStep }) {
   const [price, setPrice] = useState(0);
@@ -20,14 +21,19 @@ export default function Home({ currentStep, setCurrentStep }) {
 
   function updatePrice(e) {
     setPrice(e.target.value);
+    // setPrice(priceFormatter.format(e.target.value));
     // console.log("hey", inputTextPriceEl);
-    inputTextPriceEl.current.focus();
+    // inputTextPriceEl.current.focus();
   }
 
   function updateSize(e) {
     setSize(e.target.value);
     // console.log("hey", inputTextPriceEl);
-    inputTextSizeEl.current.focus();
+    // inputTextSizeEl.current.focus();
+  }
+
+  function focusHere(e) {
+    console.log(e.currentTarget.focus());
   }
 
   //quick fix... ugly?
@@ -40,6 +46,9 @@ export default function Home({ currentStep, setCurrentStep }) {
     sessionStorage.setItem("size_m2", formValues.size_m2.value);
     sessionStorage.setItem("price", formValues.price.value);
   }
+
+  estateTypes.sort((a, b) => (a.name > b.name ? 1 : -1));
+  // console.log(estateTypesSorted);
 
   return (
     <>
@@ -70,7 +79,7 @@ export default function Home({ currentStep, setCurrentStep }) {
                 inputMode="numeric"
                 pattern="[0-9]{3,4}"
                 title="The Zip Code should be digits (0 to 9)."
-                defaultValue="2500"
+                // defaultValue="2500"
                 required
               />
               {/* Danmarks postnumre har fire sifre, med unntak av noen spesielle
@@ -147,6 +156,7 @@ export default function Home({ currentStep, setCurrentStep }) {
                 <input
                   // name="noname"
                   onChange={updatePrice}
+                  inputMode="none"
                   type="range"
                   value={price || 1000000}
                   min="0"
@@ -164,26 +174,28 @@ export default function Home({ currentStep, setCurrentStep }) {
             </button>
           </form>
         </div>
-        <h3>To do</h3>
-        <ul>
-          <li>Full address?</li>
-          <li>...or only zip?</li>
-        </ul>
-        <p>
-          This is simple example of how you could submit a form to another page
-          in Next.js, without using a custom <code>submit</code> function (e.g.
-          without JavaScript). It is unstyled and unfinished. You can use this
-          as base, or implement your own solution.
-        </p>
-        <p>
-          Make sure to read the guide on{" "}
-          <a
-            href="https://nextjs.org/docs/guides/building-forms"
-            target="_blank"
-          >
-            building forms in Next.js
-          </a>
-        </p>
+        <div className="hidden">
+          <h3>To do</h3>
+          <ul>
+            <li>Full address?</li>
+            <li>...or only zip?</li>
+          </ul>
+          <p>
+            This is simple example of how you could submit a form to another
+            page in Next.js, without using a custom <code>submit</code> function
+            (e.g. without JavaScript). It is unstyled and unfinished. You can
+            use this as base, or implement your own solution.
+          </p>
+          <p>
+            Make sure to read the guide on{" "}
+            <a
+              href="https://nextjs.org/docs/guides/building-forms"
+              target="_blank"
+            >
+              building forms in Next.js
+            </a>
+          </p>
+        </div>
       </div>
     </>
   );

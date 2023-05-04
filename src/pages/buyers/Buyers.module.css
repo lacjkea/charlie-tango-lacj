@@ -3,7 +3,7 @@
   /* background-color: hotpink; */
   display: grid;
   gap: 2rem;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   user-select: none; /* don't select text when entire card is clickable */
 }
 
@@ -13,13 +13,35 @@
   /* border: 1px solid blue; */
 }
 
+.topCard {
+  display: grid;
+  margin: 0;
+  grid-template-columns: auto auto max-content;
+}
+
+.topCard > p {
+  grid-column: 1/-1;
+  margin: 0;
+  justify-self: end;
+  /* color: var(--dark-grey); */
+  font-size: 0.8rem;
+}
+
+.buyer-card article {
+  background-color: var(--grey);
+}
+
 .buyer-card article div {
-  border: 1px solid grey;
+  /* border: 1px solid grey; */
   display: flex;
   justify-content: flex-start;
   align-items: center;
   gap: var(--space-input);
   margin: var(--space-input);
+}
+
+.buyer-card article div p {
+  margin: 0;
 }
 
 .buyer-cards svg {
