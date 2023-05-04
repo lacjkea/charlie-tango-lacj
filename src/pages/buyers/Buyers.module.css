@@ -8,7 +8,8 @@
 }
 
 .buyer-cards label {
-  margin-top: 0;
+  max-width: 350px;
+  /* margin: 0 auto 0 auto; */
   /* background: red; */
   /* border: 1px solid blue; */
 }
@@ -29,6 +30,7 @@
 
 .buyer-card article {
   background-color: var(--grey);
+  margin: 0 auto;
 }
 
 .buyer-card article div {
@@ -42,10 +44,6 @@
 
 .buyer-card article div p {
   margin: 0;
-}
-
-.buyer-cards svg {
-  float: right;
 }
 
 /* .buyer-card article {
