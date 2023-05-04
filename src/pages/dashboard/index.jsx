@@ -14,7 +14,7 @@ export default function Dashboard() {
   const [sellers, setSellers] = useState([]);
 
   useEffect(() => {
-    fetch("../api/get-dashboard-contactlist", {
+    fetch("/api/get-dashboard-contactlist", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -29,7 +29,7 @@ export default function Dashboard() {
     // console.group();
 
     data.sort((a, b) => (a.created_at < b.created_at ? 1 : -1));
-    // console.log("datasorting", data);
+    console.log("datasorting", data);
     // console.groupEnd();
     setSellers(data);
   }
