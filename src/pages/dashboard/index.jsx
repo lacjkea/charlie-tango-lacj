@@ -1,5 +1,5 @@
 import Head from "next/head";
-// import { useRouter } from "next/router";
+import { useRouter } from "next/router";
 import Link from "next/link";
 import Image from "next/image";
 import { displayDate } from "@/data/helpers";
@@ -13,17 +13,21 @@ import CheatAddEntryToDB from "./CheatAddEntryToDB";
 export default function Dashboard() {
   const [sellers, setSellers] = useState([]);
 
+  const router = useRouter();
+
   useEffect(() => {
-    fetch("/api/get-dashboard-contactlist", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => handleData(data.response));
-    // console.log(sellers);
-  }, []);
+    if (router.isReady) {
+      fetch("/api/get-dashboard-contactlist", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+        .then((res) => res.json())
+        .then((data) => handleData(data.response));
+      // console.log(sellers);
+    }
+  }, [router.isReady]);
 
   function handleData(data) {
     // console.group();
