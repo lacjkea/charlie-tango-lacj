@@ -15,7 +15,7 @@ export default async function handler(req, res) {
       },
     }
   ).then((res) => res.json());
-  console.log("response API - get", { response });
+  // console.log("response API - get", { response });
   //return res.redirect(307, "/thanks");
   return res.status(200).json({ response });
 }
