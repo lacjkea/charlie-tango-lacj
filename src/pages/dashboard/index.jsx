@@ -12,6 +12,7 @@ import CheatAddEntryToDB from "./CheatAddEntryToDB";
 
 export default function Dashboard() {
   const [sellers, setSellers] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   const router = useRouter();
 
@@ -36,6 +37,7 @@ export default function Dashboard() {
     console.log("datasorting", data);
     // console.groupEnd();
     setSellers(data);
+    setIdLoading(false);
   }
 
   async function deleteEntry(e, id) {
@@ -76,67 +78,74 @@ export default function Dashboard() {
       <CheatAddEntryToDB sellers={sellers} setSellers={setSellers} />
       <div className="wrapper">
         <h1 className={cstyles.headline}>Sælgere</h1>
-        <div className={`${cstyles.content} ${dstyles.grid}`}>
-          {console.log("sellers", sellers)}
-          {sellers.length ? (
-            sellers.map((s1) => {
-              return (
-                <article
-                  key={s1.id}
-                  className={
-                    s1.consent ? dstyles.consent_true : dstyles.consent_false
-                  }
-                >
-                  {console.log("s1.id", s1.id)}
-                  <button type="button" onClick={(e) => deleteEntry(e, s1.id)}>
-                    <Image alt="delete" src={icon_delete}></Image>
-                  </button>
-                  <h6>
-                    {s1.id} / {displayDate(s1.created_at, true)} / Consent:{" "}
-                    {s1.consent ? "✓" : "NO!"}
-                  </h6>
-                  <h2>{s1.fname} sælger</h2>
-                  {console.log("hey2", typeof s1.seller_estate_info)}
-                  {console.log("hey3", s1.seller_estate_info)}
-                  {/*    {typeof s1.seller_estate_info === "object" && ( */}
-                  {/*     <SellerInfo
+        {isLoading ? (
+          <p>Loading....</p>
+        ) : (
+          <div className={`${cstyles.content} ${dstyles.grid}`}>
+            {console.log("sellers", sellers)}
+            {sellers.length ? (
+              sellers.map((s1) => {
+                return (
+                  <article
+                    key={s1.id}
+                    className={
+                      s1.consent ? dstyles.consent_true : dstyles.consent_false
+                    }
+                  >
+                    {console.log("s1.id", s1.id)}
+                    <button
+                      type="button"
+                      onClick={(e) => deleteEntry(e, s1.id)}
+                    >
+                      <Image alt="delete" src={icon_delete}></Image>
+                    </button>
+                    <h6>
+                      {s1.id} / {displayDate(s1.created_at, true)} / Consent:{" "}
+                      {s1.consent ? "✓" : "NO!"}
+                    </h6>
+                    <h2>{s1.fname} sælger</h2>
+                    {console.log("hey2", typeof s1.seller_estate_info)}
+                    {console.log("hey3", s1.seller_estate_info)}
+                    {/*    {typeof s1.seller_estate_info === "object" && ( */}
+                    {/*     <SellerInfo
                     seller_estate_info={JSON.parse(s1.seller_estate_info)}
                   /> */}
-                  {/* )} */}
-                  <SellerInfo
-                    seller_estate_info={JSON.parse(s1.seller_estate_info)}
-                  />
+                    {/* )} */}
+                    <SellerInfo
+                      seller_estate_info={JSON.parse(s1.seller_estate_info)}
+                    />
 
-                  <h3>Ønsker kontakt med følgende købere</h3>
-                  {!s1.contactids.length ? (
-                    <p>Ingen fundne købere</p>
-                  ) : (
-                    <ul>
-                      {s1.contactids.map((contact) => {
-                        // console.log("contact", contact);
-                        return <li key={contact}>{contact}</li>;
-                      })}
-                    </ul>
-                  )}
-                  <p>
-                    <Link
-                      href={`mailto:${s1.email}?subject=EDC-hjælp til boligsalg&body=Ang... blabla`}
-                      target="_blank"
-                    >
-                      {s1.email}
-                    </Link>
-                    <span> / </span>
-                    <Link href={`tel:${s1.phone}`}>{s1.phone}</Link>
-                  </p>
-                  <p>Besked: {s1.message}</p>
-                </article>
-              );
-              // console.log(singleSeller);
-            })
-          ) : (
-            <p>Databasen er tom</p>
-          )}
-        </div>
+                    <h3>Ønsker kontakt med følgende købere</h3>
+                    {!s1.contactids.length ? (
+                      <p>Ingen fundne købere</p>
+                    ) : (
+                      <ul>
+                        {s1.contactids.map((contact) => {
+                          // console.log("contact", contact);
+                          return <li key={contact}>{contact}</li>;
+                        })}
+                      </ul>
+                    )}
+                    <p>
+                      <Link
+                        href={`mailto:${s1.email}?subject=EDC-hjælp til boligsalg&body=Ang... blabla`}
+                        target="_blank"
+                      >
+                        {s1.email}
+                      </Link>
+                      <span> / </span>
+                      <Link href={`tel:${s1.phone}`}>{s1.phone}</Link>
+                    </p>
+                    <p>Besked: {s1.message}</p>
+                  </article>
+                );
+                // console.log(singleSeller);
+              })
+            ) : (
+              <p>Databasen er tom</p>
+            )}
+          </div>
+        )}
       </div>
     </>
   );
