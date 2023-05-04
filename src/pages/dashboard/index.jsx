@@ -33,11 +33,11 @@ export default function Dashboard() {
   function handleData(data) {
     // console.group();
 
-    data.sort((a, b) => (a.created_at < b.created_at ? 1 : -1));
+    // data.sort((a, b) => (a.created_at < b.created_at ? 1 : -1));
     console.log("datasorting", data);
     // console.groupEnd();
     setSellers(data);
-    setIdLoading(false);
+    setIsLoading(false);
   }
 
   async function deleteEntry(e, id) {
