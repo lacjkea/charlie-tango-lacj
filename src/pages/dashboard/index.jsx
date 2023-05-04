@@ -142,7 +142,7 @@ export default function Dashboard() {
                 // console.log(singleSeller);
               })
             ) : (
-              <p>Databasen er tom</p>
+              <p>Databasen er tom - THE KEY?</p>
             )}
           </div>
         )}
