@@ -32,10 +32,10 @@ export default function Thanks({ setCurrentStep }) {
         For Demo purposes: <Link href="/dashboard">Dashboard</Link>
         <h3>To do - dette er undervejs</h3>
         <ol>
-          <li>Validering</li>
+          <li>Validering... halvfuld kop?</li>
           <li>
-            Accessibility: tjek BBC's kontrastværktøj - og stepperen... links
-            med <code>pointer-events: none;</code>
+            Accessibility: tjek BBC&apos;s kontrastværktøj - og stepperen...
+            links med <code>pointer-events: none;</code> og validering...
           </li>
           <li>CSS og code splitting - købersiden ser ikke så flot ud</li>
           <li>Tjek session storage på tværs af .jsx (det er noget rod)</li>

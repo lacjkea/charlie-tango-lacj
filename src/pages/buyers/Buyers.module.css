@@ -49,12 +49,11 @@
 /* .buyer-card article {
   display: grid;
 } */
-
+/* 
 label.buyer-card {
-  /* className="buyer-card" - not updating while dev, so it also is className={styles["buyer-card"] */
-
-  /* background-color: red; */
-}
+  className="buyer-card" - not updating while dev, so it also is className={styles["buyer-card"] */
+/* background-color: red; 
+}*/
 
 .fixDet {
   padding: 0 1rem;

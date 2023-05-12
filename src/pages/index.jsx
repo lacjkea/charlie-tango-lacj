@@ -112,6 +112,7 @@ export default function Home({ currentStep, setCurrentStep }) {
               <div className={cstyles.centerbox}>
                 <input
                   onChange={updateSize}
+                  id="size_m2"
                   name="size_m2"
                   type="text"
                   ref={inputTextSizeEl}
@@ -144,6 +145,7 @@ export default function Home({ currentStep, setCurrentStep }) {
               <span className={cstyles.label}>Forventet pris</span>
               <div className={cstyles.centerbox}>
                 <input
+                  id="price"
                   name="price"
                   type="text"
                   onChange={updatePrice}
