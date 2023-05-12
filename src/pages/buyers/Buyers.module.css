@@ -55,3 +55,10 @@ label.buyer-card {
 
   /* background-color: red; */
 }
+
+.fixDet {
+  padding: 0 1rem;
+  background-color: var(--dusty-aqua-light);
+  border: 1px solid var(--dusty-aqua);
+  margin-bottom: 1rem;
+}

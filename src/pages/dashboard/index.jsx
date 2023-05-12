@@ -99,10 +99,10 @@ export default function Dashboard() {
                     >
                       <Image alt="delete" src={icon_delete}></Image>
                     </button>
-                    <h6>
+                    <p>
                       {s1.id} / {displayDate(s1.created_at, true)} / Consent:{" "}
                       {s1.consent ? "✓" : "NO!"}
-                    </h6>
+                    </p>
                     <h2>{s1.fname} sælger</h2>
                     {console.log("hey2", typeof s1.seller_estate_info)}
                     {console.log("hey3", s1.seller_estate_info)}

@@ -72,23 +72,21 @@ export default function Buyers({ currentStep, setCurrentStep }) {
         .then((data) => {
           handleFetched(data); //lacj todo: clean up data
         });
+      function handleFetched(data) {
+        // console.log(data);
+        sessionStorage.setItem("sellerinfo", JSON.stringify(router.query));
+        sessionStorage.setItem("queryString", router.asPath);
+        setBuyers(data);
+        sessionStorage.setItem("buyers", JSON.stringify(data));
+        setBuyers(data);
+      }
     }
     // sessionStorage.setItem("sellerinfo", )
     // }, [q, router, setCurrentStep]);
-  }, [q]);
-
-  function handleFetched(data) {
-    // console.log(data);
-    sessionStorage.setItem("sellerinfo", JSON.stringify(router.query));
-    sessionStorage.setItem("queryString", router.asPath);
-    setBuyers(data);
-    sessionStorage.setItem("buyers", JSON.stringify(data));
-    setBuyers(data);
-  }
+  }, [q, router, setCurrentStep]);
 
   function toggleDetails(e) {
     console.log(e.currentTarget.textContent);
-
     e.currentTarget.previousElementSibling.classList.toggle("hidden");
     e.currentTarget.textContent == "Se mindre"
       ? (e.currentTarget.textContent = "Læs mere")
@@ -116,9 +114,9 @@ export default function Buyers({ currentStep, setCurrentStep }) {
           <span className={cstyles.accent}>købere</span> i{" "}
           <span ref={zipcodeRef}></span>
         </h1>
-        {/* <div className={cstyles.content}> lacj!!! */}
-        <div className="fixDet">
-          <h3>Vælg købere, du vil i kontakt med</h3>
+        {/* <div className={cstyles.content}> fix det lacj!!! */}
+        <div className={styles.fixDet}>
+          <h2>Vælg købere, du vil i kontakt med</h2>
           <form action="/contact" method="GET" className={cstyles.form}>
             <div className={styles["buyer-cards"]}>
               {buyers.map((singleBuyer) => (

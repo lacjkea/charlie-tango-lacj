@@ -41,7 +41,16 @@ html {
   margin: 0;
 }
 
-ul {
+h2 {
+  font-size: 1.17em;
+}
+
+p {
+  line-height: 1.5;
+}
+
+ul,
+ol {
   padding: 0;
 }
 

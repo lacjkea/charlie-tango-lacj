@@ -15,7 +15,7 @@ export function Stepper({ currentStep, setCurrentStep }) {
 
   return (
     <nav className={styles.stepper}>
-      <ul>
+      <ol>
         <StepItem
           currentStep={currentStep}
           jumpToStep={jumpToStep}
@@ -48,9 +48,9 @@ export function Stepper({ currentStep, setCurrentStep }) {
               />
             </span>
           </Link>
-          <h4>kontakter dig</h4>
+          <span className={styles.stepper_text}>kontakter dig</span>
         </li>
-      </ul>
+      </ol>
     </nav>
   );
 }

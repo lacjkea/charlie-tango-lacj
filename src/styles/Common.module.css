@@ -20,6 +20,7 @@
 
 .accent {
   color: var(--yellow);
+  background-color: var(--blue);
   font-family: var(--font-serif);
   font-size: 3rem;
   line-height: 1.33;

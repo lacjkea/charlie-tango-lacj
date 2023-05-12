@@ -16,8 +16,7 @@ export default function Contact({ currentStep, setCurrentStep }) {
   useEffect(() => {
     setCurrentStep(3);
     if (router.isReady) {
-      router.query.contact_ids &&
-      updateList(router.query.contact_ids);
+      router.query.contact_ids && updateList(router.query.contact_ids);
       console.log("loglist", router.query.contact_ids);
     }
   }, [router.isReady, router.query.contact_ids, setCurrentStep]);
@@ -123,10 +122,10 @@ export default function Contact({ currentStep, setCurrentStep }) {
           3. Din <span className={cstyles.accent}>kontaktinfo</span>rmation
         </h1>
         <div className={cstyles.content}>
-          <h3>
+          <h2>
             Giv os dine kontaktoplysninger for at få adgang til vores
             køberkartotek
-          </h3>
+          </h2>
           <form
             action="/thanks"
             onSubmit={submitted}
@@ -137,19 +136,19 @@ export default function Contact({ currentStep, setCurrentStep }) {
           >
             {/* lacj */}
             <div className={cstyles["buyer-cards"]}>
-              <ul className={cstyles.label}>
-                {!contactList.length ? (
-                  <>
-                    <p>
-                      <em>Ingen købere? </em>
-                    </p>
-                    <p>
-                      Det tror vi ikke på. Skal vi hjælpe dig med at finde en
-                      køber?
-                    </p>
-                  </>
-                ) : (
-                  contactList.map((singleContact) => (
+              {!contactList.length ? (
+                <div className={cstyles.label}>
+                  <p>
+                    <em>Ingen købere? </em>
+                  </p>
+                  <p>
+                    Det tror vi ikke på. Skal vi hjælpe dig med at finde en
+                    køber?
+                  </p>
+                </div>
+              ) : (
+                <ul className={cstyles.label}>
+                  {contactList.map((singleContact) => (
                     <li key={singleContact}>
                       <input
                         type="hidden"
@@ -164,9 +163,9 @@ export default function Contact({ currentStep, setCurrentStep }) {
                         Fjern
                       </button>
                     </li>
-                  ))
-                )}
-              </ul>
+                  ))}
+                </ul>
+              )}
               <label>
                 <span className={cstyles.label}>Dit navn *</span>
                 <input type="text" name="fname" id="fname" required />

@@ -60,7 +60,7 @@ export default function Home({ currentStep, setCurrentStep }) {
           1. Sælg din <span className={cstyles.accent}>bolig</span>
         </h1>
         <div className={cstyles.content}>
-          <h3>Information om din bolig</h3>
+          <h2>Information om din bolig</h2>
           {/* Read this: https://nextjs.org/docs/guides/building-forms (they said) */}
           <form
             action="/buyers"
@@ -131,6 +131,8 @@ export default function Home({ currentStep, setCurrentStep }) {
                   // name="noname"
                   onChange={updateSize}
                   type="range"
+                  aria-hidden="true"
+                  tabIndex="-1"
                   value={size}
                   min="0"
                   max="500"
@@ -158,6 +160,8 @@ export default function Home({ currentStep, setCurrentStep }) {
                   onChange={updatePrice}
                   inputMode="none"
                   type="range"
+                  aria-hidden="true"
+                  tabIndex="-1"
                   value={price || 1000000}
                   min="0"
                   max="20000000"

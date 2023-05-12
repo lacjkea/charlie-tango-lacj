@@ -28,7 +28,7 @@ export default function StepItem({
       >
         <span className={styles.accent}>{isStepDone ? "✓" : stepNumber}</span>
       </Link>
-      <h4>{title}</h4>
+      <span className={styles.stepper_text}>{title}</span>
     </li>
   );
 }
