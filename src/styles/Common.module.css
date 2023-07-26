@@ -114,8 +114,8 @@
 }
 
 .form [type="checkbox"]:checked + svg path {
-  background-color: green !important;
-  padding: 10px;
+  /*  background-color: green !important;
+  padding: 10px; */
   fill: currentColor;
 }
 

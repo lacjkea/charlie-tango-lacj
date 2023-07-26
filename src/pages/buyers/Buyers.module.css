@@ -61,3 +61,7 @@ label.buyer-card {
   border: 1px solid var(--dusty-aqua);
   margin-bottom: 1rem;
 }
+
+.maincard {
+  /* background: red; */
+}

@@ -91,7 +91,8 @@ export default function Home({ currentStep, setCurrentStep }) {
                 name="estateType"
                 id="estatetype-select"
                 // size="4"
-                title="Please select a type from this list"
+                title="Vælg boligtype"
+                aria-label="Vælg boligtype"
                 defaultValue={"8"}
                 required
               >
